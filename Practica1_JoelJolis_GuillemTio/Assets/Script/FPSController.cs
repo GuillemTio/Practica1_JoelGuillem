@@ -7,17 +7,6 @@ public class FPSController : MonoBehaviour
     float m_VerticalSpeed;
     public Transform m_PitchController;
 
-    internal bool CanPickAmmo()
-    {
-        return true;
-    }
-
-    public float m_YawSpeed;
-
-    internal void AddAmmo(int m_AmmoCount)
-    {
-        //not implemented
-    }
 
     public float m_PitchSpeed;
     public bool m_YawInverted;
@@ -27,6 +16,7 @@ public class FPSController : MonoBehaviour
     public float m_Speed;
     public float m_SprintSpeed;
     public float m_JumpSpeed;
+    public float m_YawSpeed;
 
     Vector3 m_StartPosition;
     Quaternion m_StartRotation;
@@ -45,6 +35,11 @@ public class FPSController : MonoBehaviour
     public float m_MaxShootDistance;
     public LayerMask m_LayerMask;
     public GameObject m_HitParticlesPrefab;
+    public int m_StartAmmo;
+    public int m_MaxBulletPerClip;
+    public int m_LoadedAmmo;
+    public int m_OtherAmmo;
+
 
 
     [Header("Input")]
@@ -68,7 +63,7 @@ public class FPSController : MonoBehaviour
     {
 
         m_CharacterController = GetComponent<CharacterController>();
-        if(GameController.GetGameController().m_Player == null)
+        if (GameController.GetGameController().m_Player == null)
         {
             GameController.GetGameController().m_Player = this;
             GameObject.DontDestroyOnLoad(gameObject);
@@ -90,6 +85,7 @@ public class FPSController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         SetIdleWeaponAnimation();
+        SetAmmo(m_StartAmmo);
     }
 
     void Update()
@@ -107,7 +103,6 @@ public class FPSController : MonoBehaviour
         }
 #endif
 
-
         float l_HorizontalMovement = Input.GetAxis("Mouse X");
         float l_VerticalMovement = Input.GetAxis("Mouse Y");
 
@@ -121,7 +116,7 @@ public class FPSController : MonoBehaviour
 
         float l_Speed = m_Speed;
 
-        if(Input.GetKeyDown(m_JumpKeyCode)&& m_VerticalSpeed == 0)
+        if (Input.GetKeyDown(m_JumpKeyCode) && m_VerticalSpeed == 0)
         {
             m_VerticalSpeed = m_JumpSpeed;
         }
@@ -187,9 +182,9 @@ public class FPSController : MonoBehaviour
         l_Movement.y = m_VerticalSpeed * Time.deltaTime;
 
         CollisionFlags l_CollisionFlags = m_CharacterController.Move(l_Movement);
-        if ((l_CollisionFlags & CollisionFlags.CollidedBelow)!= 0)
+        if ((l_CollisionFlags & CollisionFlags.CollidedBelow) != 0)
             m_VerticalSpeed = 0f;
-        if ((l_CollisionFlags & CollisionFlags.CollidedBelow) != 0 && m_VerticalSpeed>0f)
+        if ((l_CollisionFlags & CollisionFlags.CollidedBelow) != 0 && m_VerticalSpeed > 0f)
             m_VerticalSpeed = 0f;
 
         //m_CharacterController.Move(l_Movement);
@@ -198,7 +193,7 @@ public class FPSController : MonoBehaviour
         {
             Shoot();
         }
-        if (Input.GetKeyDown(m_ReloadKeyCode)&& CanReload())
+        if (Input.GetKeyDown(m_ReloadKeyCode) && CanReload())
         {
             Reload();
         }
@@ -206,17 +201,20 @@ public class FPSController : MonoBehaviour
 
     private bool CanReload()
     {
-        return true;
+        return (m_LoadedAmmo < m_MaxBulletPerClip) && (m_OtherAmmo!=0);
     }
 
     private void Reload()
     {
         SetReloadWeaponAnimation();
+        int l_LoadedAmmoBeforeReload = m_LoadedAmmo;
+        m_LoadedAmmo = Math.Clamp(m_OtherAmmo+m_LoadedAmmo, 0, m_MaxBulletPerClip);
+        m_OtherAmmo = Math.Max(0, m_OtherAmmo - (m_LoadedAmmo-l_LoadedAmmoBeforeReload));
     }
 
     bool CanShoot()
     {
-        return true;
+        return m_LoadedAmmo > 0;
     }
 
     private void Shoot()
@@ -224,15 +222,16 @@ public class FPSController : MonoBehaviour
         SetShootWeaponAnimation();
         Ray l_Ray = m_Camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         RaycastHit l_RaycastHit;
-        if(Physics.Raycast(l_Ray, out l_RaycastHit, m_MaxShootDistance, m_LayerMask.value))
+        if (Physics.Raycast(l_Ray, out l_RaycastHit, m_MaxShootDistance, m_LayerMask.value))
         {
             CreateShootHitParticles(l_RaycastHit.point, l_RaycastHit.normal);
         }
+        m_LoadedAmmo -= 1;
     }
 
     private void CreateShootHitParticles(Vector3 point, Vector3 normal)
     {
-        GameObject l_HitParticles = GameObject.Instantiate(m_HitParticlesPrefab,GameController.GetGameController().m_DestroyObjects.transform);
+        GameObject l_HitParticles = GameObject.Instantiate(m_HitParticlesPrefab, GameController.GetGameController().m_DestroyObjects.transform);
         l_HitParticles.transform.position = point;
         l_HitParticles.transform.rotation = Quaternion.LookRotation(normal);
     }
@@ -244,8 +243,8 @@ public class FPSController : MonoBehaviour
 
     void SetShootWeaponAnimation()
     {
-        m_WeaponAnimation.CrossFade(m_ShootAnimationClip.name,0.1f);
-        m_WeaponAnimation.CrossFadeQueued(m_IdleAnimationClip.name,0.1f);
+        m_WeaponAnimation.CrossFade(m_ShootAnimationClip.name, 0.1f);
+        m_WeaponAnimation.CrossFadeQueued(m_IdleAnimationClip.name, 0.1f);
     }
 
     void SetReloadWeaponAnimation()
@@ -282,5 +281,21 @@ public class FPSController : MonoBehaviour
             Item l_Item = other.GetComponent<Item>();
             if (l_Item.CanPick()) l_Item.Pick();
         }
+    }
+    internal bool CanPickAmmo()
+    {
+        return true;
+    }
+
+    private void SetAmmo(int startAmmo)
+    {
+        int l_StartAmmo = startAmmo;
+        m_LoadedAmmo = Math.Clamp(l_StartAmmo, 0, m_MaxBulletPerClip);
+        m_OtherAmmo = Math.Max(0, l_StartAmmo - m_LoadedAmmo);
+    }
+
+    internal void AddAmmo(int m_AmmoCount)
+    {
+        m_OtherAmmo += m_AmmoCount;
     }
 }

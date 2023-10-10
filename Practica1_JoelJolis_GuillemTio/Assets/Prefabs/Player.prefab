@@ -165,7 +165,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PitchController: {fileID: 5269552004676201393}
-  m_YawSpeed: 360
   m_PitchSpeed: 180
   m_YawInverted: 0
   m_PitchInverted: 1
@@ -174,6 +173,7 @@ MonoBehaviour:
   m_Speed: 25
   m_SprintSpeed: 35
   m_JumpSpeed: 10
+  m_YawSpeed: 360
   m_WeaponAnimation: {fileID: 2913916883709871889}
   m_ShootAnimationClip: {fileID: 7400000, guid: 3482ebabfe11fc94fa8127f68320da7a, type: 2}
   m_IdleAnimationClip: {fileID: 7400000, guid: 7f394bb3d39c2da44ad6afe7cfb586d2, type: 2}
@@ -184,6 +184,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2147483647
   m_HitParticlesPrefab: {fileID: 5031046392345779431, guid: b62ab6bc6624c7c4cb1725b61eb35bc6, type: 3}
+  m_StartAmmo: 37
+  m_MaxBulletPerClip: 20
+  m_LoadedAmmo: 0
+  m_OtherAmmo: 0
   m_LeftKeyCode: 97
   m_RightKeyCode: 100
   m_UpKeyCode: 119

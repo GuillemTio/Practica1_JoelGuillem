@@ -4,7 +4,6 @@ public class FPSController : MonoBehaviour
 {
     float m_Yaw;
     float m_Pitch;
-    float m_VerticalSpeed;
     public Transform m_PitchController;
 
 
@@ -14,9 +13,12 @@ public class FPSController : MonoBehaviour
     public float m_MinPitch;
     public float m_MaxPitch;
     public float m_Speed;
+    public float m_VerticalSpeed;
     public float m_SprintSpeed;
     public float m_JumpSpeed;
     public float m_YawSpeed;
+
+    public float m_LastTimeOnFloor;
 
     Vector3 m_StartPosition;
     Quaternion m_StartRotation;
@@ -112,9 +114,9 @@ public class FPSController : MonoBehaviour
             l_VerticalMovement = 0f;
         }
 
-
-
         float l_Speed = m_Speed;
+
+        m_LastTimeOnFloor += Time.deltaTime;
 
         if (Input.GetKeyDown(m_JumpKeyCode) && m_VerticalSpeed == 0)
         {
@@ -181,13 +183,21 @@ public class FPSController : MonoBehaviour
         m_VerticalSpeed = m_VerticalSpeed + Physics.gravity.y * Time.deltaTime;
         l_Movement.y = m_VerticalSpeed * Time.deltaTime;
 
+
         CollisionFlags l_CollisionFlags = m_CharacterController.Move(l_Movement);
         if ((l_CollisionFlags & CollisionFlags.CollidedBelow) != 0)
             m_VerticalSpeed = 0f;
+            m_LastTimeOnFloor = 0.0f;
         if ((l_CollisionFlags & CollisionFlags.CollidedBelow) != 0 && m_VerticalSpeed > 0f)
             m_VerticalSpeed = 0f;
 
+
         //m_CharacterController.Move(l_Movement);
+
+        if (Input.GetKeyDown(m_JumpKeyCode) && m_VerticalSpeed == 0.0f)
+        {
+            m_VerticalSpeed = m_JumpSpeed;
+        }
 
         if (Input.GetMouseButtonDown(m_ShootMouseButton) && CanShoot())
         {

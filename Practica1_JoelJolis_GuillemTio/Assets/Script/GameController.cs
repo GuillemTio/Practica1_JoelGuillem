@@ -31,6 +31,7 @@ public class GameController : MonoBehaviour
 
     void DestroyLevelObjects()
     {
+        m_Player.RestartLevel();
         Transform[] l_Transforms = m_DestroyObjects.GetComponentsInChildren<Transform>();
         foreach (Transform l_Transform in l_Transforms)
         {
@@ -44,6 +45,12 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.U))
+            RestartLevel();
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            GoToLevel1();
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            GoToLevel2();
         
     }
 

@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     static GameController m_GameController = null;
     public GameObject m_DestroyObjects;
     public FPSController m_Player;
+    public HUD m_HUD;
 
     static public GameController GetGameController()
     {

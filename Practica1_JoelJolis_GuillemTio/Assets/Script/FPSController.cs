@@ -87,7 +87,7 @@ public class FPSController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         SetIdleWeaponAnimation();
-        SetAmmo(m_StartAmmo);
+        SetAmmo();
     }
 
     void Update()
@@ -265,6 +265,7 @@ public class FPSController : MonoBehaviour
         m_WeaponAnimation.CrossFade(m_ReloadAnimationClip.name, 0.1f);
         m_WeaponAnimation.CrossFadeQueued(m_IdleAnimationClip.name, 0.1f);
     }
+
     public void RestartLevel()
     {
         m_CharacterController.enabled = false;
@@ -273,7 +274,9 @@ public class FPSController : MonoBehaviour
         m_Yaw = transform.rotation.eulerAngles.y;
         m_Pitch = 0.0f;
         m_CharacterController.enabled = true;
+        SetAmmo();
     }
+
     void SetStartPosition(Transform startTransform)
     {
         m_StartPosition = startTransform.position;
@@ -300,11 +303,10 @@ public class FPSController : MonoBehaviour
         return true;
     }
 
-    private void SetAmmo(int startAmmo)
+    private void SetAmmo()
     {
-        int l_StartAmmo = startAmmo;
-        m_LoadedAmmo = Math.Clamp(l_StartAmmo, 0, m_MaxBulletPerClip);
-        m_OtherAmmo = Math.Max(0, l_StartAmmo - m_LoadedAmmo);
+        m_LoadedAmmo = Math.Clamp(m_StartAmmo, 0, m_MaxBulletPerClip);
+        m_OtherAmmo = Math.Max(0, m_StartAmmo - m_LoadedAmmo);
         m_HUD.SetLoadedAmmoText(m_LoadedAmmo);
         m_HUD.SetOtherAmmoText(m_OtherAmmo);
     }

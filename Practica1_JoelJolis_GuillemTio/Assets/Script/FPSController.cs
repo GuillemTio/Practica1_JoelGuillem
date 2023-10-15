@@ -326,23 +326,34 @@ public class FPSController : MonoBehaviour
     {
         m_HealthCurrent = m_HealthStart;
         m_ShieldCurrent = m_ShieldStart;
+
+        m_HUD.SetHealthBar(m_HealthCurrent);
+        m_HUD.SetShieldBar(m_ShieldCurrent);
     }
 
     public void TakeDamage(float damage)
     {
-        if (m_ShieldCurrent != 0)
+        if (m_ShieldCurrent > 0)
         {
-            float l_ShieldDamage = damage * 75 / 100;
             float l_HealthDamage = damage * 25 / 100;
-            m_ShieldCurrent -= l_ShieldDamage;
+            float l_ShieldDamage = damage * 75 / 100;
             m_HealthCurrent -= l_HealthDamage;
+            m_ShieldCurrent -= l_ShieldDamage;
+
+            m_HealthCurrent = Mathf.Max(0, m_HealthCurrent);
+            m_ShieldCurrent = Mathf.Max(0, m_ShieldCurrent);
+
+            m_HUD.SetHealthBar(m_HealthCurrent);
+            m_HUD.SetShieldBar(m_ShieldCurrent);
         }
         else
         {
             m_HealthCurrent -= damage;
+            m_HealthCurrent = Mathf.Max(0, m_HealthCurrent);
+            m_HUD.SetHealthBar(m_HealthCurrent);
         }
 
-        if(m_HealthCurrent == 0)
+        if(m_HealthCurrent <= 0)
         {
 
             // hace falta que pueda morir!!!!!!!!

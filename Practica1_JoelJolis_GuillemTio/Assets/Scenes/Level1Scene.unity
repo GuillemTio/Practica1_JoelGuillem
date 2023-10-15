@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 66904303}
   - component: {fileID: 66904302}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: OtherAmmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -348,9 +348,10 @@ GameObject:
   - component: {fileID: 235253852}
   - component: {fileID: 235253851}
   - component: {fileID: 235253850}
+  - component: {fileID: 235253854}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -443,6 +444,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &235253854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235253849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5a813c79cd71f0448d4a3207f4f28c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LoadedAmmoText: {fileID: 656382196}
+  m_OtherAmmoText: {fileID: 66904302}
 --- !u!1 &572112323
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,7 +616,7 @@ GameObject:
   - component: {fileID: 656382197}
   - component: {fileID: 656382196}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: LoadedAmmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1121,18 +1136,6 @@ PrefabInstance:
     - target: {fileID: 5269552006736292178, guid: 97304eb98bae8b4408190accf3920c48, type: 3}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5269552006736292178, guid: 97304eb98bae8b4408190accf3920c48, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5269552006736292178, guid: 97304eb98bae8b4408190accf3920c48, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5269552006736292178, guid: 97304eb98bae8b4408190accf3920c48, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5269552006736292178, guid: 97304eb98bae8b4408190accf3920c48, type: 3}
       propertyPath: m_LocalPosition.x

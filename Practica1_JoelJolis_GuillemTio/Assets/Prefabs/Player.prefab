@@ -165,6 +165,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PitchController: {fileID: 5269552004676201393}
+  m_HealthStart: 100
+  m_ShieldStart: 100
   m_PitchSpeed: 180
   m_YawInverted: 0
   m_PitchInverted: 1

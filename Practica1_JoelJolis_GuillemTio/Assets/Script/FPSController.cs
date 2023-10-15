@@ -8,6 +8,11 @@ public class FPSController : MonoBehaviour
 
     private HUD m_HUD;
 
+    public float m_HealthStart;
+    float m_HealthCurrent;
+    public float m_ShieldStart;
+    float m_ShieldCurrent;
+
     public float m_PitchSpeed;
     public bool m_YawInverted;
     public bool m_PitchInverted;
@@ -71,6 +76,8 @@ public class FPSController : MonoBehaviour
             GameObject.DontDestroyOnLoad(gameObject);
             m_StartPosition = transform.position;
             m_StartRotation = transform.rotation;
+            SetAmmo();
+            SetHealthShield();
 
             m_Yaw = transform.rotation.eulerAngles.y;
         }
@@ -82,12 +89,10 @@ public class FPSController : MonoBehaviour
 
     }
 
-
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         SetIdleWeaponAnimation();
-        SetAmmo();
     }
 
     void Update()
@@ -187,7 +192,7 @@ public class FPSController : MonoBehaviour
         CollisionFlags l_CollisionFlags = m_CharacterController.Move(l_Movement);
         if ((l_CollisionFlags & CollisionFlags.CollidedBelow) != 0)
             m_VerticalSpeed = 0f;
-            m_LastTimeOnFloor = 0.0f;
+        m_LastTimeOnFloor = 0.0f;
         if ((l_CollisionFlags & CollisionFlags.CollidedBelow) != 0 && m_VerticalSpeed > 0f)
             m_VerticalSpeed = 0f;
 
@@ -211,15 +216,15 @@ public class FPSController : MonoBehaviour
 
     private bool CanReload()
     {
-        return (m_LoadedAmmo < m_MaxBulletPerClip) && (m_OtherAmmo!=0);
+        return (m_LoadedAmmo < m_MaxBulletPerClip) && (m_OtherAmmo != 0);
     }
 
     private void Reload()
     {
         SetReloadWeaponAnimation();
         int l_LoadedAmmoBeforeReload = m_LoadedAmmo;
-        m_LoadedAmmo = Math.Clamp(m_OtherAmmo+m_LoadedAmmo, 0, m_MaxBulletPerClip);
-        m_OtherAmmo = Math.Max(0, m_OtherAmmo - (m_LoadedAmmo-l_LoadedAmmoBeforeReload));
+        m_LoadedAmmo = Math.Clamp(m_OtherAmmo + m_LoadedAmmo, 0, m_MaxBulletPerClip);
+        m_OtherAmmo = Math.Max(0, m_OtherAmmo - (m_LoadedAmmo - l_LoadedAmmoBeforeReload));
         m_HUD.SetLoadedAmmoText(m_LoadedAmmo);
         m_HUD.SetOtherAmmoText(m_OtherAmmo);
     }
@@ -315,5 +320,33 @@ public class FPSController : MonoBehaviour
     {
         m_OtherAmmo += m_AmmoCount;
         m_HUD.SetOtherAmmoText(m_OtherAmmo);
+    }
+
+    private void SetHealthShield()
+    {
+        m_HealthCurrent = m_HealthStart;
+        m_ShieldCurrent = m_ShieldStart;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        if (m_ShieldCurrent != 0)
+        {
+            float l_ShieldDamage = damage * 75 / 100;
+            float l_HealthDamage = damage * 25 / 100;
+            m_ShieldCurrent -= l_ShieldDamage;
+            m_HealthCurrent -= l_HealthDamage;
+        }
+        else
+        {
+            m_HealthCurrent -= damage;
+        }
+
+        if(m_HealthCurrent == 0)
+        {
+
+            // hace falta que pueda morir!!!!!!!!
+        }
+
     }
 }

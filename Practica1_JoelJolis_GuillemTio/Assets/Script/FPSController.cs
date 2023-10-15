@@ -132,18 +132,6 @@ public class FPSController : MonoBehaviour
         {
             l_Speed = m_SprintSpeed;
         }
-        /*
-        float l_YawInverted = 1f;
-        float l_PitchInverted = 1f;
-
-        if (m_YawInverted)
-        {
-            l_YawInverted = -1.0f;
-        }
-        if (m_PitchInverted)
-        {
-            l_PitchInverted = -1.0f;
-        }*/
 
         float l_YawInverted = m_YawInverted ? -1f : 1f;
         float l_PitchInverted = m_PitchInverted ? -1f : 1f;

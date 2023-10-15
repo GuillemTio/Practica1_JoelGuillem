@@ -6,6 +6,7 @@ public class FPSController : MonoBehaviour
     float m_Pitch;
     public Transform m_PitchController;
 
+    private HUD m_HUD;
 
     public float m_PitchSpeed;
     public bool m_YawInverted;
@@ -43,7 +44,6 @@ public class FPSController : MonoBehaviour
     public int m_OtherAmmo;
 
 
-
     [Header("Input")]
 
     public KeyCode m_LeftKeyCode = KeyCode.A;
@@ -63,7 +63,7 @@ public class FPSController : MonoBehaviour
 
     private void Awake()
     {
-
+        m_HUD = GameObject.FindGameObjectWithTag("UI").GetComponent<HUD>();
         m_CharacterController = GetComponent<CharacterController>();
         if (GameController.GetGameController().m_Player == null)
         {
@@ -220,6 +220,8 @@ public class FPSController : MonoBehaviour
         int l_LoadedAmmoBeforeReload = m_LoadedAmmo;
         m_LoadedAmmo = Math.Clamp(m_OtherAmmo+m_LoadedAmmo, 0, m_MaxBulletPerClip);
         m_OtherAmmo = Math.Max(0, m_OtherAmmo - (m_LoadedAmmo-l_LoadedAmmoBeforeReload));
+        m_HUD.SetLoadedAmmoText(m_LoadedAmmo);
+        m_HUD.SetOtherAmmoText(m_OtherAmmo);
     }
 
     bool CanShoot()
@@ -237,6 +239,7 @@ public class FPSController : MonoBehaviour
             CreateShootHitParticles(l_RaycastHit.point, l_RaycastHit.normal);
         }
         m_LoadedAmmo -= 1;
+        m_HUD.SetLoadedAmmoText(m_LoadedAmmo);
     }
 
     private void CreateShootHitParticles(Vector3 point, Vector3 normal)
@@ -302,10 +305,13 @@ public class FPSController : MonoBehaviour
         int l_StartAmmo = startAmmo;
         m_LoadedAmmo = Math.Clamp(l_StartAmmo, 0, m_MaxBulletPerClip);
         m_OtherAmmo = Math.Max(0, l_StartAmmo - m_LoadedAmmo);
+        m_HUD.SetLoadedAmmoText(m_LoadedAmmo);
+        m_HUD.SetOtherAmmoText(m_OtherAmmo);
     }
 
     internal void AddAmmo(int m_AmmoCount)
     {
         m_OtherAmmo += m_AmmoCount;
+        m_HUD.SetOtherAmmoText(m_OtherAmmo);
     }
 }

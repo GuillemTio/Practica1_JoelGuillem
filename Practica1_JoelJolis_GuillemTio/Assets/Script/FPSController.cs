@@ -230,6 +230,11 @@ public class FPSController : MonoBehaviour
         if (Physics.Raycast(l_Ray, out l_RaycastHit, m_MaxShootDistance, m_LayerMask.value))
         {
             CreateShootHitParticles(l_RaycastHit.point, l_RaycastHit.normal);
+
+            if(m_LayerMask.value == 3)
+            {
+                print ("Enter");
+            }
         }
         m_LoadedAmmo -= 1;
         m_HUD.SetLoadedAmmoText(m_LoadedAmmo);

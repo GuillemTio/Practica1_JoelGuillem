@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Item
   - UI
+  - HumanTarget
   layers:
   - Default
   - TransparentFX

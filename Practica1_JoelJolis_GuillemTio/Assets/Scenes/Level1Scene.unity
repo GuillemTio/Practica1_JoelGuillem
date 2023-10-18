@@ -968,6 +968,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: AmmoItem
       objectReference: {fileID: 0}
+    - target: {fileID: 6498469448284697567, guid: 840cf17a87e012649bba18299d9117c3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -48.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 6498469448284697567, guid: 840cf17a87e012649bba18299d9117c3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 19.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 6498469448284697567, guid: 840cf17a87e012649bba18299d9117c3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 27.56
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 840cf17a87e012649bba18299d9117c3, type: 3}
 --- !u!1 &886233042 stripped
@@ -983,12 +995,27 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 886233042}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 1
   m_Height: 8
   m_Direction: 1
   m_Center: {x: 0, y: 3, z: 0}
+--- !u!114 &886233045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886233042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11828a9a21abe22459c2520aae0b7e5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+  points: 100
+  isMoving: 1
 --- !u!1001 &1062369290
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1006,31 +1033,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5269552006736292178, guid: 97304eb98bae8b4408190accf3920c48, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -154.5
+      value: -39.6
       objectReference: {fileID: 0}
     - target: {fileID: 5269552006736292178, guid: 97304eb98bae8b4408190accf3920c48, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 16.174164
+      value: 13.3
       objectReference: {fileID: 0}
     - target: {fileID: 5269552006736292178, guid: 97304eb98bae8b4408190accf3920c48, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -30.570976
+      value: 11.5
       objectReference: {fileID: 0}
     - target: {fileID: 5269552006736292178, guid: 97304eb98bae8b4408190accf3920c48, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.6540028
       objectReference: {fileID: 0}
     - target: {fileID: 5269552006736292178, guid: 97304eb98bae8b4408190accf3920c48, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5269552006736292178, guid: 97304eb98bae8b4408190accf3920c48, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.75649214
       objectReference: {fileID: 0}
     - target: {fileID: 5269552006736292178, guid: 97304eb98bae8b4408190accf3920c48, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5269552006736292178, guid: 97304eb98bae8b4408190accf3920c48, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1038,7 +1065,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5269552006736292178, guid: 97304eb98bae8b4408190accf3920c48, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 98.312
       objectReference: {fileID: 0}
     - target: {fileID: 5269552006736292178, guid: 97304eb98bae8b4408190accf3920c48, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -1565,7 +1592,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f48b20921f4c9684b9c02ab2ea1ef207, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.875511
+      value: 4.78
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f48b20921f4c9684b9c02ab2ea1ef207, type: 3}
       propertyPath: m_LocalRotation.w

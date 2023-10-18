@@ -8,10 +8,14 @@ public class FPSController : MonoBehaviour
 
     private HUD m_HUD;
 
+    public float m_Damage;
+
     public float m_HealthStart;
     float m_HealthCurrent;
     public float m_ShieldStart;
     float m_ShieldCurrent;
+
+    float m_ScoreCurrent;
 
     public float m_PitchSpeed;
     public bool m_YawInverted;
@@ -78,6 +82,7 @@ public class FPSController : MonoBehaviour
             m_StartRotation = transform.rotation;
             SetAmmo();
             SetHealthShield();
+            SetScore();
 
             m_Yaw = transform.rotation.eulerAngles.y;
         }
@@ -231,9 +236,10 @@ public class FPSController : MonoBehaviour
         {
             CreateShootHitParticles(l_RaycastHit.point, l_RaycastHit.normal);
 
-            if(m_LayerMask.value == 3)
+            Target l_target = l_RaycastHit.transform.GetComponent<Target>();
+            if (l_target != null)
             {
-                print ("Enter");
+                AddScore(l_target.points);
             }
         }
         m_LoadedAmmo -= 1;
@@ -299,6 +305,19 @@ public class FPSController : MonoBehaviour
     internal bool CanPickAmmo()
     {
         return true;
+    }
+
+
+    private void SetScore()
+    {
+        m_ScoreCurrent = 0;
+        m_HUD.SetScorePoints(m_ScoreCurrent);
+    }
+
+    internal void AddScore(float points)
+    {
+        m_ScoreCurrent = m_ScoreCurrent + points;
+        print(m_ScoreCurrent);
     }
 
     private void SetAmmo()

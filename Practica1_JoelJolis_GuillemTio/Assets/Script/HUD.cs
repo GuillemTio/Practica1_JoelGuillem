@@ -9,6 +9,8 @@ public class HUD : MonoBehaviour
     public TextMeshProUGUI m_LoadedAmmoText;
     public TextMeshProUGUI m_OtherAmmoText;
 
+    public TextMeshProUGUI m_ScorePointsText;
+
     public Slider m_HealthBar;
     public Slider m_ShieldBar;
 
@@ -47,5 +49,10 @@ public class HUD : MonoBehaviour
         {
             m_ShieldBar.fillRect.gameObject.SetActive(false);
         }
+    }
+
+    public void SetScorePoints(float points)
+    {
+        //m_ScorePointsText
     }
 }

@@ -16,6 +16,8 @@ public class FPSController : MonoBehaviour
     float m_ShieldCurrent;
 
     float m_ScoreCurrent;
+    int m_ScoreTimer;
+    bool m_ScoreActivateTimer;
 
     public float m_PitchSpeed;
     public bool m_YawInverted;
@@ -311,6 +313,7 @@ public class FPSController : MonoBehaviour
     private void SetScore()
     {
         m_ScoreCurrent = 0;
+        m_ScoreTimer = 30;
         m_HUD.SetScorePoints(m_ScoreCurrent);
     }
 

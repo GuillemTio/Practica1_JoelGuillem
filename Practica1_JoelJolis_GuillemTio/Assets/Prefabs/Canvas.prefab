@@ -598,8 +598,8 @@ MonoBehaviour:
   m_ScorePointsText: {fileID: 0}
   m_HealthBar: {fileID: 6379298329919427218}
   m_ShieldBar: {fileID: 6379298329760257330}
-  m_HealthText: {fileID: 0}
-  m_ShieldText: {fileID: 0}
+  m_HealthText: {fileID: 8939517148809365164}
+  m_ShieldText: {fileID: 3111264359740501490}
 --- !u!1 &6379298329413154724
 GameObject:
   m_ObjectHideFlags: 0
@@ -1891,7 +1891,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -540.6, y: 229.4}
+  m_AnchoredPosition: {x: -540.6, y: 228.2}
   m_SizeDelta: {x: 75.6712, y: 19.4537}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7877684317440576514

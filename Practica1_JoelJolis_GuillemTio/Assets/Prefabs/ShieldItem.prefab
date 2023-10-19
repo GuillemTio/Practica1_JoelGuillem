@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1967206187506457894}
   - component: {fileID: 1967206187506457893}
-  - component: {fileID: 1967206187506457892}
+  - component: {fileID: 579439988250652501}
   m_Layer: 0
   m_Name: ShieldItem
   m_TagString: Item
@@ -47,7 +47,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.89
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1967206187506457892
+--- !u!114 &579439988250652501
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,10 +56,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1967206187506457899}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30ad7773fa5aeb543864d627ddab84cd, type: 3}
+  m_Script: {fileID: 11500000, guid: ea1c9289061069a4aaa5656254e04c40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AmmoCount: 20
+  m_ShieldCount: 30
 --- !u!1001 &5478117086621795908
 PrefabInstance:
   m_ObjectHideFlags: 0

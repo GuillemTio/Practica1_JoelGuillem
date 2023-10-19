@@ -6,12 +6,12 @@ public class ShieldItem : Item
 
     public override bool CanPick()
     {
-        return GameController.GetGameController().m_Player.CanPickAmmo();
+        return GameController.GetGameController().m_Player.CanPickShield();
     }
 
     public override void Pick()
     {
-        GameController.GetGameController().m_Player.AddAmmo(m_AmmoCount);
+        GameController.GetGameController().m_Player.AddShield(m_ShieldCount);
         base.Pick();
     }
 }

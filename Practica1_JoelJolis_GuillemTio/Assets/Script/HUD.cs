@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class HUD : MonoBehaviour
 {
@@ -13,6 +12,8 @@ public class HUD : MonoBehaviour
 
     public Slider m_HealthBar;
     public Slider m_ShieldBar;
+    public TextMeshProUGUI m_HealthText;
+    public TextMeshProUGUI m_ShieldText;
 
     private void Awake()
     {
@@ -27,32 +28,42 @@ public class HUD : MonoBehaviour
         }
     }
 
-    public void SetLoadedAmmoText(int ammo)
+    internal void SetLoadedAmmoText(int ammo)
     {
         m_LoadedAmmoText.text = ammo.ToString();
     }
 
-    public void SetOtherAmmoText(int ammo)
+    internal void SetOtherAmmoText(int ammo)
     {
         m_OtherAmmoText.text = ammo.ToString();
     }
 
-    public void SetHealthBar(float health)
+    internal void SetHealthBar(float health)
     {
         m_HealthBar.value = Mathf.Clamp(health, 0, 100);
     }
 
-    public void SetShieldBar(float shield)
+    internal void SetShieldBar(float shield)
     {
-        m_ShieldBar.value = Mathf.Clamp(shield, 0, 100);
+        m_ShieldBar.value = shield;
         if (m_ShieldBar.value == 0)
         {
             m_ShieldBar.fillRect.gameObject.SetActive(false);
         }
     }
+    internal void SetHealthText(float HealthCurrent)
+    {
+        m_HealthText.text = HealthCurrent.ToString();
+    }
 
-    public void SetScorePoints(float points)
+    internal void SetShieldText(float ShieldCurrent)
+    {
+        m_ShieldText.text = ShieldCurrent.ToString();
+    }
+
+    internal void SetScorePoints(float points)
     {
         //m_ScorePointsText
     }
+
 }

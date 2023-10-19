@@ -6,12 +6,12 @@ public class HealthItem : Item
 
     public override bool CanPick()
     {
-        return GameController.GetGameController().m_Player.CanPickAmmo();
+        return GameController.GetGameController().m_Player.CanPickHealth();
     }
 
     public override void Pick()
     {
-        GameController.GetGameController().m_Player.AddAmmo(m_AmmoCount);
+        GameController.GetGameController().m_Player.AddHealth(m_HealthCount);
         base.Pick();
     }
 }

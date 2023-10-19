@@ -346,13 +346,31 @@ public class FPSController : MonoBehaviour
         m_HUD.SetOtherAmmoText(m_OtherAmmo);
     }
 
+    internal void AddHealth(int m_HealthCount)
+    {
+        m_HealthCurrent += m_HealthCount;
+        m_HealthCurrent = Mathf.Min(m_HealthCurrent,100);
+        m_HUD.SetHealthText(m_HealthCurrent);
+        m_HUD.SetHealthBar(m_HealthCurrent);
+    }
+
+    internal void AddShield(int m_ShieldCount)
+    {
+        m_ShieldCurrent += m_ShieldCount;
+        m_ShieldCurrent = Mathf.Min(m_ShieldCurrent, 100);
+        m_HUD.SetShieldText(m_ShieldCurrent);
+        m_HUD.SetShieldBar(m_ShieldCurrent);
+    }
+
     private void SetHealthShield()
     {
-        m_HealthCurrent = m_HealthStart;
-        m_ShieldCurrent = m_ShieldStart;
+        m_HealthCurrent = Mathf.Clamp(m_HealthStart,0,100);
+        m_ShieldCurrent = Mathf.Clamp(m_ShieldStart,0,100);
 
         m_HUD.SetHealthBar(m_HealthCurrent);
+        m_HUD.SetHealthText(m_HealthCurrent);
         m_HUD.SetShieldBar(m_ShieldCurrent);
+        m_HUD.SetShieldText(m_ShieldCurrent);
     }
 
     public void TakeDamage(float damage)
@@ -368,13 +386,16 @@ public class FPSController : MonoBehaviour
             m_ShieldCurrent = Mathf.Max(0, m_ShieldCurrent);
 
             m_HUD.SetHealthBar(m_HealthCurrent);
+            m_HUD.SetHealthText(m_HealthCurrent);
             m_HUD.SetShieldBar(m_ShieldCurrent);
+            m_HUD.SetShieldText(m_ShieldCurrent);
         }
         else
         {
             m_HealthCurrent -= damage;
             m_HealthCurrent = Mathf.Max(0, m_HealthCurrent);
             m_HUD.SetHealthBar(m_HealthCurrent);
+            m_HUD.SetHealthText(m_HealthCurrent);
         }
 
         if(m_HealthCurrent <= 0)

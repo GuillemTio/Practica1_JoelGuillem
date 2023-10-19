@@ -309,6 +309,15 @@ public class FPSController : MonoBehaviour
         return true;
     }
 
+    internal bool CanPickHealth()
+    {
+        return m_HealthCurrent<100;
+    }
+
+    internal bool CanPickShield()
+    {
+        return m_ShieldCurrent < 100;
+    }
 
     private void SetScore()
     {

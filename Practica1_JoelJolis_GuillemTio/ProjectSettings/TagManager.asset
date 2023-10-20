@@ -7,6 +7,8 @@ TagManager:
   - Item
   - UI
   - HumanTarget
+  - Enemy
+  - ShootingArea
   layers:
   - Default
   - TransparentFX

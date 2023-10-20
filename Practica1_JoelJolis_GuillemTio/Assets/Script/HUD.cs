@@ -67,9 +67,9 @@ public class HUD : MonoBehaviour
         m_ScorePointsText.text = points.ToString();
     }
 
-    internal void SetScoreTimer(int timer)
+    internal void SetScoreTimer(float timer)
     {
-        m_ScoreTimer.text = timer.ToString();
+        m_ScoreTimer.text = timer.ToString("0");
     }
 
 }

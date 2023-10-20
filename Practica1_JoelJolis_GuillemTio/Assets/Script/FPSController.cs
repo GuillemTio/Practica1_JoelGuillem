@@ -16,7 +16,8 @@ public class FPSController : MonoBehaviour
     float m_ShieldCurrent;
 
     float m_ScoreCurrent;
-    int m_ScoreTimer;
+    float m_ScoreTimer;
+    bool m_ScoreEnter;
 
     public float m_PitchSpeed;
     public bool m_YawInverted;
@@ -64,6 +65,7 @@ public class FPSController : MonoBehaviour
     public KeyCode m_JumpKeyCode = KeyCode.Space;
     public KeyCode m_SprintKeyCode = KeyCode.LeftShift;
     public KeyCode m_ReloadKeyCode = KeyCode.R;
+    public KeyCode m_EnterKeyCode = KeyCode.KeypadEnter;
     public int m_ShootMouseButton = 0;
 
     [Header("DebugInput")]
@@ -209,8 +211,12 @@ public class FPSController : MonoBehaviour
             Reload();
         }
 
-        //m_ScoreTimer -= 1 * Time.deltaTime;
-        //print(m_ScoreTimer);
+        if (m_ScoreEnter == true)
+        {
+            m_ScoreTimer -= 1 * Time.deltaTime;
+            m_HUD.SetScoreTimer(m_ScoreTimer);
+            print("llego papa");
+        }
     }
 
     private bool CanReload()
@@ -312,6 +318,10 @@ public class FPSController : MonoBehaviour
             Item l_Item = other.GetComponent<Item>();
             if (l_Item.CanPick()) l_Item.Pick();
         }
+        if(other.tag == "ShootingArea")
+        {
+            m_ScoreEnter = true;
+        }
     }
     internal bool CanPickAmmo()
     {
@@ -327,7 +337,6 @@ public class FPSController : MonoBehaviour
     {
         return m_ShieldCurrent < 100;
     }
-
     private void SetScore()
     {
         m_ScoreCurrent = 0;

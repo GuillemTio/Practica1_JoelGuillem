@@ -25,11 +25,13 @@ public class Enemy : MonoBehaviour
     int m_CurrentPatrolPositionId = 0;
     public float m_MaxDistanceToSeePlayer;
     private float m_ConeVisionAngle;
+    public float m_AlertRotationVelocity;
     public LayerMask m_SeesPlayerLayerMask;
     int m_Life;
     public int m_MaxLife = 100;
     Vector3 m_StartPosition;
     Quaternion m_StartRotation;
+    Quaternion m_LastRotationPose;
 
     [Header("LifeBar")]
     public Transform m_LifeBarAnchor;
@@ -48,7 +50,6 @@ public class Enemy : MonoBehaviour
         m_Life = m_MaxLife;
         GameController.GetGameController().AddEnemy(this);
         SetIdleState();
-        ShowLifeBar();
     }
 
     private void OnDestroy()
@@ -102,10 +103,31 @@ public class Enemy : MonoBehaviour
 
     private void UpdateLifeBarPosition()
     {
-        Vector3 l_ViewportPosition = GameController.GetGameController().m_Player.m_Camera.WorldToViewportPoint(m_LifeBarAnchor.position);
-        m_LifeBarBackgroundRectTransform.anchoredPosition = new Vector3(l_ViewportPosition.x * Screen.width, -(Screen.height - l_ViewportPosition.y * Screen.height));
-        m_LifeBarBackgroundRectTransform.gameObject.SetActive(l_ViewportPosition.z >= 0f);
-        ShowLifeBar();
+        Vector3 l_PlayerPosition = GameController.GetGameController().m_Player.transform.position;
+        Vector3 l_EnemyPosition = transform.position;
+        float l_DistanceToPlayer = Vector3.Distance(l_PlayerPosition, l_EnemyPosition);
+
+        Vector3 l_EnemyToPlayer = l_PlayerPosition - l_EnemyPosition;
+
+        l_EnemyToPlayer.y = 0.0f;
+        l_EnemyToPlayer.Normalize();
+
+        Ray l_Ray = new Ray(l_EnemyPosition + Vector3.up * 1.8f, l_EnemyToPlayer);
+        if (!Physics.Raycast(l_Ray, l_DistanceToPlayer, m_SeesPlayerLayerMask.value))
+        {
+            if (!m_LifeBarBackgroundRectTransform.gameObject.activeSelf)
+            {
+                m_LifeBarBackgroundRectTransform.gameObject.SetActive(true);
+            }
+            Vector3 l_ViewportPosition = GameController.GetGameController().m_Player.m_Camera.WorldToViewportPoint(m_LifeBarAnchor.position);
+            m_LifeBarBackgroundRectTransform.anchoredPosition = new Vector3(l_ViewportPosition.x * Screen.width, -(Screen.height - l_ViewportPosition.y * Screen.height));
+            m_LifeBarBackgroundRectTransform.gameObject.SetActive(l_ViewportPosition.z >= 0f);
+            ShowLifeBar();
+        }
+        else if (m_LifeBarBackgroundRectTransform.gameObject.activeSelf)
+        {
+            m_LifeBarBackgroundRectTransform.gameObject.SetActive(false);
+        }
     }
 
     void SetIdleState()
@@ -146,11 +168,26 @@ public class Enemy : MonoBehaviour
     {
         if (!m_NavMeshAgent.hasPath && m_NavMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)
             NextPatrolPosition();
+        if (HearsPlayer())
+        {
+            SetAlertState();
+            m_LastRotationPose = transform.rotation;
+            m_NavMeshAgent.isStopped = true;
+        }
 
     }
     void UpdateAlertState()
     {
-
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, transform.rotation.y + 360, 0), 1);
+        if (transform.rotation.y > m_LastRotationPose.y+360)
+        {
+            transform.rotation = m_LastRotationPose;
+            SetPatrolState();
+            m_NavMeshAgent.isStopped = false;
+        }
+        else if (SeesPlayer())
+            SetChaseState();
+        
     }
     void UpdateChaseState()
     {
@@ -158,18 +195,17 @@ public class Enemy : MonoBehaviour
     }
     void UpdateAttackState()
     {
-
+        //animacio
     }
-
 
     void UpdateHitState()
     {
-
+        //animacio
     }
 
     void UpdateDieState()
     {
-
+        //animacio
     }
 
     void SetNextChasePosition()

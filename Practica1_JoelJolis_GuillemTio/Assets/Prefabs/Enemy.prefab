@@ -456,17 +456,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c017f3ab7632184c824a5e3d591b1e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MinDistanceToAttack: 5
-  m_HearsPlayerRadius: 15
+  m_MinDistanceToAttack: 6
+  m_HearsPlayerRadius: 17
   m_PatrolPositions:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  m_MaxDistanceToSeePlayer: 0
+  m_MaxDistanceToSeePlayer: 11
+  m_AlertRotationVelocity: 0.01
   m_SeesPlayerLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   m_MaxLife: 100
   m_LifeBarAnchor: {fileID: 1097673969012981123}
   m_LifeBarBackgroundRectTransform: {fileID: 1097673969382677140}

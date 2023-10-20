@@ -9,6 +9,7 @@ public class HUD : MonoBehaviour
     public TextMeshProUGUI m_OtherAmmoText;
 
     public TextMeshProUGUI m_ScorePointsText;
+    public TextMeshProUGUI m_ScoreTimer;
 
     public Slider m_HealthBar;
     public Slider m_ShieldBar;
@@ -64,6 +65,11 @@ public class HUD : MonoBehaviour
     internal void SetScorePoints(float points)
     {
         m_ScorePointsText.text = points.ToString();
+    }
+
+    internal void SetScoreTimer(int timer)
+    {
+        m_ScoreTimer.text = timer.ToString();
     }
 
 }

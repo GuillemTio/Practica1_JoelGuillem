@@ -17,7 +17,6 @@ public class FPSController : MonoBehaviour
 
     float m_ScoreCurrent;
     int m_ScoreTimer;
-    bool m_ScoreActivateTimer;
 
     public float m_PitchSpeed;
     public bool m_YawInverted;
@@ -207,6 +206,9 @@ public class FPSController : MonoBehaviour
         {
             Reload();
         }
+
+        m_ScoreTimer -= 1 * Time.deltaTime;
+        print(m_ScoreTimer);
     }
 
     private bool CanReload()

@@ -11,15 +11,20 @@ public class GameController : MonoBehaviour
     public FPSController m_Player;
     public HUD m_HUD;
 
+    List<Enemy> m_Enemies;
+    static bool m_AlreadyInitialized = false;
+
     static public GameController GetGameController()
     {
-        if(m_GameController == null)
+        if (m_GameController == null && !m_AlreadyInitialized)
         {
             GameObject l_GameObject = new GameObject("GameController");
             m_GameController = l_GameObject.AddComponent<GameController>();
             m_GameController.m_DestroyObjects = new GameObject("DestroyObjects");
             m_GameController.m_DestroyObjects.transform.SetParent(l_GameObject.transform);
+            m_GameController.m_Enemies = new List<Enemy>();
             GameController.DontDestroyOnLoad(l_GameObject);
+            m_AlreadyInitialized = true;
         }
         return m_GameController;
     }
@@ -27,12 +32,15 @@ public class GameController : MonoBehaviour
     public void RestartLevel()
     {
         m_Player.RestartLevel();
+        foreach (Enemy l_Enemy in m_Enemies)
+        {
+            l_Enemy.RestartLevel();
+        }
         DestroyLevelObjects();
     }
 
     void DestroyLevelObjects()
     {
-        m_Player.RestartLevel();
         Transform[] l_Transforms = m_DestroyObjects.GetComponentsInChildren<Transform>();
         foreach (Transform l_Transform in l_Transforms)
         {
@@ -40,19 +48,13 @@ public class GameController : MonoBehaviour
             {
                 GameObject.Destroy(l_Transform.gameObject);
             }
-            
+
         }
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.U))
-            RestartLevel();
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            GoToLevel1();
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-            GoToLevel2();
-        
+
     }
 
     public void GoToLevel1()
@@ -70,5 +72,14 @@ public class GameController : MonoBehaviour
         DestroyLevelObjects();
         GameObject.Destroy(m_Player.gameObject);
         SceneManager.LoadSceneAsync("MainMenuScene");
+    }
+
+    public void AddEnemy(Enemy _Enemy)
+    {
+        m_Enemies.Add(_Enemy);
+    }
+    public void RemoveEnemy(Enemy _Enemy)
+    {
+        m_Enemies.Remove(_Enemy);
     }
 }

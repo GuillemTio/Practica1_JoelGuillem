@@ -52,6 +52,7 @@ public class FPSController : MonoBehaviour
     public int m_MaxBulletPerClip;
     public int m_LoadedAmmo;
     public int m_OtherAmmo;
+    CPoolElements m_PoolElements;
 
 
     [Header("Input")]
@@ -97,6 +98,7 @@ public class FPSController : MonoBehaviour
 
     void Start()
     {
+        m_PoolElements = new CPoolElements(20, m_HitParticlesPrefab, null);
         Cursor.lockState = CursorLockMode.Locked;
         SetIdleWeaponAnimation();
     }
@@ -207,8 +209,8 @@ public class FPSController : MonoBehaviour
             Reload();
         }
 
-        m_ScoreTimer -= 1 * Time.deltaTime;
-        print(m_ScoreTimer);
+        //m_ScoreTimer -= 1 * Time.deltaTime;
+        //print(m_ScoreTimer);
     }
 
     private bool CanReload()
@@ -245,6 +247,10 @@ public class FPSController : MonoBehaviour
             {
                 AddScore(l_target.points);
             }
+            else if (l_RaycastHit.collider.tag == "Enemy")
+            {
+                l_RaycastHit.collider.GetComponent<HitCollider>().Hit();
+            }
         }
         m_LoadedAmmo -= 1;
         m_HUD.SetLoadedAmmoText(m_LoadedAmmo);
@@ -252,7 +258,8 @@ public class FPSController : MonoBehaviour
 
     private void CreateShootHitParticles(Vector3 point, Vector3 normal)
     {
-        GameObject l_HitParticles = GameObject.Instantiate(m_HitParticlesPrefab, GameController.GetGameController().m_DestroyObjects.transform);
+        //GameObject l_HitParticles = GameObject.Instantiate(m_HitParticlesPrefab,GameController.GetGameController().m_DestroyObjects.transform);
+        GameObject l_HitParticles = m_PoolElements.GetNextElement();
         l_HitParticles.transform.position = point;
         l_HitParticles.transform.rotation = Quaternion.LookRotation(normal);
     }
@@ -409,5 +416,11 @@ public class FPSController : MonoBehaviour
             // hace falta que pueda morir!!!!!!!!
         }
 
+    }
+    void Kill()
+    {
+        m_HealthCurrent = 0;
+        //it should start after a while
+        GameController.GetGameController().RestartLevel();
     }
 }

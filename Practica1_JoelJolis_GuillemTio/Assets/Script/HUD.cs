@@ -63,7 +63,7 @@ public class HUD : MonoBehaviour
 
     internal void SetScorePoints(float points)
     {
-        //m_ScorePointsText
+        m_ScorePointsText.text = points.ToString();
     }
 
 }

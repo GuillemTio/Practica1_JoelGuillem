@@ -330,7 +330,10 @@ public class FPSController : MonoBehaviour
     {
         m_ScoreCurrent = m_ScoreCurrent + points;
         print(m_ScoreCurrent);
+        m_HUD.SetScorePoints(m_ScoreCurrent);
     }
+
+
 
     private void SetAmmo()
     {

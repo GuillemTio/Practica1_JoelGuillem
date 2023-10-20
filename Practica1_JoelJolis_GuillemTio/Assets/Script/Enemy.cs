@@ -93,6 +93,13 @@ public class Enemy : MonoBehaviour
         UpdateLifeBarPosition();
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, m_HearsPlayerRadius);
+        Gizmos.DrawWireSphere(transform.position, m_MaxDistanceToSeePlayer);
+        Gizmos.DrawWireSphere(transform.position, m_MinDistanceToAttack);
+    }
+
     private void UpdateLifeBarPosition()
     {
         Vector3 l_ViewportPosition = GameController.GetGameController().m_Player.m_Camera.WorldToViewportPoint(m_LifeBarAnchor.position);

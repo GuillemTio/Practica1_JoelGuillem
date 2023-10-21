@@ -211,9 +211,9 @@ public class FPSController : MonoBehaviour
             Reload();
         }
 
-        if (m_ScoreEnter == true)
+        if ((m_ScoreEnter == true))
         {
-            m_ScoreTimer -= 1 * Time.deltaTime;
+            m_ScoreTimer -= Time.deltaTime;
             m_HUD.SetScoreTimer(m_ScoreTimer);
             print("llego papa");
         }
@@ -248,7 +248,7 @@ public class FPSController : MonoBehaviour
         {
 
             Target l_target = l_RaycastHit.transform.GetComponent<Target>();
-            if (l_target != null)
+            if (l_target != null && m_ScoreEnter == true)
             {
                 AddScore(l_target.points);
                 CreateShootHitParticles(l_RaycastHit.point, l_RaycastHit.normal);
@@ -322,11 +322,16 @@ public class FPSController : MonoBehaviour
             Item l_Item = other.GetComponent<Item>();
             if (l_Item.CanPick()) l_Item.Pick();
         }
-        if(other.tag == "ShootingArea")
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if ((other.tag == "ShootingArea") && (Input.GetKeyDown(m_EnterKeyCode)))
         {
             m_ScoreEnter = true;
         }
     }
+
     internal bool CanPickAmmo()
     {
         return true;
@@ -345,17 +350,21 @@ public class FPSController : MonoBehaviour
     {
         m_ScoreCurrent = 0;
         m_ScoreTimer = 30;
-        m_HUD.SetScorePoints(m_ScoreCurrent);
+        if(m_ScoreEnter == true)
+        {
+            m_HUD.SetScorePoints(m_ScoreCurrent);
+        }
     }
 
     internal void AddScore(float points)
     {
         m_ScoreCurrent = m_ScoreCurrent + points;
         print(m_ScoreCurrent);
-        m_HUD.SetScorePoints(m_ScoreCurrent);
+        if (m_ScoreEnter == true)
+        {
+            m_HUD.SetScorePoints(m_ScoreCurrent);
+        }
     }
-
-
 
     private void SetAmmo()
     {

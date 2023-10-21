@@ -40341,15 +40341,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5269552006736292178, guid: 97304eb98bae8b4408190accf3920c48, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -194.55237
+      value: -226.43
       objectReference: {fileID: 0}
     - target: {fileID: 5269552006736292178, guid: 97304eb98bae8b4408190accf3920c48, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.25
+      value: 4.4
       objectReference: {fileID: 0}
     - target: {fileID: 5269552006736292178, guid: 97304eb98bae8b4408190accf3920c48, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -147.88272
+      value: -97.8
       objectReference: {fileID: 0}
     - target: {fileID: 5269552006736292178, guid: 97304eb98bae8b4408190accf3920c48, type: 3}
       propertyPath: m_LocalRotation.w
@@ -50609,6 +50609,10 @@ PrefabInstance:
     - target: {fileID: 1097673969012981125, guid: 05d7592ba8aff1d45ab7ff1eddd67386, type: 3}
       propertyPath: m_Name
       value: Enemy1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1097673969012981126, guid: 05d7592ba8aff1d45ab7ff1eddd67386, type: 3}
+      propertyPath: m_AlertRotationVelocity
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1097673969012981126, guid: 05d7592ba8aff1d45ab7ff1eddd67386, type: 3}
       propertyPath: m_PatrolPositions.Array.data[0]

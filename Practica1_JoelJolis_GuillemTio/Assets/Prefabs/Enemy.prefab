@@ -464,10 +464,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   m_MaxDistanceToSeePlayer: 11
-  m_AlertRotationVelocity: 0.01
+  m_ConeVisionAngle: 55
+  m_AlertRotationVelocity: 1
   m_SeesPlayerLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 2147483647
   m_MaxLife: 100
   m_LifeBarAnchor: {fileID: 1097673969012981123}
   m_LifeBarBackgroundRectTransform: {fileID: 1097673969382677140}

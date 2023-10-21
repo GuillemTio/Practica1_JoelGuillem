@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
     public List<Transform> m_PatrolPositions;
     int m_CurrentPatrolPositionId = 0;
     public float m_MaxDistanceToSeePlayer;
-    private float m_ConeVisionAngle;
+    public float m_ConeVisionAngle;
     public float m_AlertRotationVelocity;
     public LayerMask m_SeesPlayerLayerMask;
     int m_Life;
@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-
+        Debug.Log(m_State);
         switch (m_State)
         {
             case TState.IDLE:
@@ -137,22 +137,28 @@ public class Enemy : MonoBehaviour
     void SetPatrolState()
     {
         m_State = TState.PATROL;
+        m_NavMeshAgent.isStopped = false;
     }
     void SetAlertState()
     {
         m_State = TState.ALERT;
+        m_LastRotationPose= transform.rotation;
+        m_NavMeshAgent.isStopped = true;
     }
     void SetChaseState()
     {
         m_State = TState.CHASE;
+        SetNextChasePosition();
     }
     void SetAttackState()
     {
         m_State = TState.ATTACK;
+        //animacio
     }
     void SetHitState()
     {
         m_State = TState.HIT;
+        //animacio
     }
     void SetDieState()
     {
@@ -160,6 +166,7 @@ public class Enemy : MonoBehaviour
         gameObject.SetActive(false);
         //animacion
     }
+
     void UpdateIdleState()
     {
         SetPatrolState();
@@ -169,25 +176,25 @@ public class Enemy : MonoBehaviour
         if (!m_NavMeshAgent.hasPath && m_NavMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)
             NextPatrolPosition();
         if (HearsPlayer())
-        {
             SetAlertState();
-            m_LastRotationPose = transform.rotation;
-            m_NavMeshAgent.isStopped = true;
-        }
 
     }
     void UpdateAlertState()
     {
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, transform.rotation.y + 360, 0), 1);
-        if (transform.rotation.y > m_LastRotationPose.y+360)
+        //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(transform.rotation.x, m_LastRotationPose.y + 1, transform.rotation.z), 1f);
+        //transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y + (m_AlertRotationVelocity * Mathf.Deg2Rad), transform.rotation.z);
+        //Debug.Log("ActualRotation = " + transform.rotation.y + " , objective rotation = " + m_LastRotationPose.y + 1);
+        transform.Rotate(new Vector3(0,m_AlertRotationVelocity*Time.deltaTime,0));
+
+        if ((int)transform.rotation.eulerAngles.y==(int)m_LastRotationPose.eulerAngles.y)
         {
             transform.rotation = m_LastRotationPose;
             SetPatrolState();
-            m_NavMeshAgent.isStopped = false;
         }
         else if (SeesPlayer())
             SetChaseState();
-        
+
+
     }
     void UpdateChaseState()
     {
@@ -195,17 +202,17 @@ public class Enemy : MonoBehaviour
     }
     void UpdateAttackState()
     {
-        //animacio
+
     }
 
     void UpdateHitState()
     {
-        //animacio
+
     }
 
     void UpdateDieState()
     {
-        //animacio
+
     }
 
     void SetNextChasePosition()
@@ -244,6 +251,7 @@ public class Enemy : MonoBehaviour
         Vector3 l_PlayerPosition = GameController.GetGameController().m_Player.transform.position;
         Vector3 l_EnemyPosition = transform.position;
         float l_DistanceToPlayer = Vector3.Distance(l_PlayerPosition, l_EnemyPosition);
+
         if (l_DistanceToPlayer < m_MaxDistanceToSeePlayer)
         {
             Vector3 l_EnemyForward = transform.forward;
@@ -255,10 +263,12 @@ public class Enemy : MonoBehaviour
             l_EnemyToPlayer.Normalize();
 
             float l_DotAngle = Vector3.Dot(l_EnemyForward, l_EnemyToPlayer);
+
             if (l_DotAngle >= Mathf.Cos(Mathf.Deg2Rad * m_ConeVisionAngle / 2f))
             {
                 Ray l_Ray = new Ray(l_EnemyPosition + Vector3.up * 1.8f, l_EnemyToPlayer);
                 if (!Physics.Raycast(l_Ray, l_DistanceToPlayer, m_SeesPlayerLayerMask.value))
+
                     return true;
             }
         }
@@ -268,7 +278,6 @@ public class Enemy : MonoBehaviour
     public void Hit(int LifePoints)
     {
         m_Life -= LifePoints;
-        Debug.Log(m_Life);
         if (m_Life <= 0)
         {
             SetDieState();

@@ -359,7 +359,7 @@ public class FPSController : MonoBehaviour
     internal void AddScore(float points)
     {
         m_ScoreCurrent = m_ScoreCurrent + points;
-        print(m_ScoreCurrent);
+
         if (m_ScoreEnter == true)
         {
             m_HUD.SetScorePoints(m_ScoreCurrent);

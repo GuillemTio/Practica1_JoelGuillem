@@ -16,8 +16,6 @@ public class HUD : MonoBehaviour
     public TextMeshProUGUI m_HealthText;
     public TextMeshProUGUI m_ShieldText;
 
-    public FPSController m_Player;
-
     private void Awake()
     {
         if (GameController.GetGameController().m_HUD == null)
@@ -66,19 +64,12 @@ public class HUD : MonoBehaviour
 
     internal void SetScorePoints(float points)
     {
-        if(m_Player.m_ScoreEnter == true)
-        {
-            m_ScorePointsText.text = points.ToString();
-        }
+        m_ScorePointsText.text = points.ToString();
     }
 
     internal void SetScoreTimer(float timer)
     {
-        
-        if (m_Player.m_ScoreEnter == true)
-        {
-            m_ScoreTimer.text = timer.ToString("0");
-        }    
+        m_ScoreTimer.text = timer.ToString("0");
     }
 
 }

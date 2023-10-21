@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -32,11 +33,20 @@ public class Enemy : MonoBehaviour
     Vector3 m_StartPosition;
     Quaternion m_StartRotation;
     Quaternion m_LastRotationPose;
+    float m_RotationOffset = 2f;
+    bool m_CanStopRotating;
 
     [Header("LifeBar")]
     public Transform m_LifeBarAnchor;
     public RectTransform m_LifeBarBackgroundRectTransform;
     public Image m_LifeBarImage;
+
+    [Header("Attack")]
+    public float m_ShootDamage;
+    public float m_TimeToShoot;
+    float m_ShootTimer = 0;
+    public float m_MaxDistanceToShoot;
+
 
     private void Awake()
     {
@@ -63,7 +73,6 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(m_State);
         switch (m_State)
         {
             case TState.IDLE:
@@ -92,6 +101,7 @@ public class Enemy : MonoBehaviour
         }
         //que se vea segun distancia y raycast(cuando el jugador vea al dron)
         UpdateLifeBarPosition();
+        Debug.Log(DistanceToPlayer());
     }
 
     private void OnDrawGizmos()
@@ -99,6 +109,8 @@ public class Enemy : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, m_HearsPlayerRadius);
         Gizmos.DrawWireSphere(transform.position, m_MaxDistanceToSeePlayer);
         Gizmos.DrawWireSphere(transform.position, m_MinDistanceToAttack);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, m_MaxDistanceToShoot);
     }
 
     private void UpdateLifeBarPosition()
@@ -133,37 +145,46 @@ public class Enemy : MonoBehaviour
     void SetIdleState()
     {
         m_State = TState.IDLE;
+        Debug.Log(m_State);
     }
     void SetPatrolState()
     {
         m_State = TState.PATROL;
         m_NavMeshAgent.isStopped = false;
+        m_CanStopRotating = false;
+        Debug.Log(m_State);
     }
     void SetAlertState()
     {
         m_State = TState.ALERT;
-        m_LastRotationPose= transform.rotation;
+        m_LastRotationPose = transform.rotation;
         m_NavMeshAgent.isStopped = true;
+        Debug.Log(m_State);
     }
     void SetChaseState()
     {
         m_State = TState.CHASE;
-        SetNextChasePosition();
+        m_CanStopRotating = false;
+        m_NavMeshAgent.isStopped = false;
+        Debug.Log(m_State);
     }
     void SetAttackState()
     {
         m_State = TState.ATTACK;
+        Debug.Log(m_State);
         //animacio
     }
     void SetHitState()
     {
         m_State = TState.HIT;
+        Debug.Log(m_State);
         //animacio
     }
     void SetDieState()
     {
         m_State = TState.DIE;
         gameObject.SetActive(false);
+        Debug.Log(m_State);
         //animacion
     }
 
@@ -181,12 +202,12 @@ public class Enemy : MonoBehaviour
     }
     void UpdateAlertState()
     {
-        //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(transform.rotation.x, m_LastRotationPose.y + 1, transform.rotation.z), 1f);
-        //transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y + (m_AlertRotationVelocity * Mathf.Deg2Rad), transform.rotation.z);
-        //Debug.Log("ActualRotation = " + transform.rotation.y + " , objective rotation = " + m_LastRotationPose.y + 1);
-        transform.Rotate(new Vector3(0,m_AlertRotationVelocity*Time.deltaTime,0));
-
-        if ((int)transform.rotation.eulerAngles.y==(int)m_LastRotationPose.eulerAngles.y)
+        transform.Rotate(new Vector3(0, m_AlertRotationVelocity * Time.deltaTime, 0));
+        if((int)transform.rotation.eulerAngles.y > ((int)m_LastRotationPose.eulerAngles.y + m_RotationOffset) && (!m_CanStopRotating))
+            m_CanStopRotating = true;
+        
+        if (((int)transform.rotation.eulerAngles.y > ((int)m_LastRotationPose.eulerAngles.y - m_RotationOffset)) &&
+            ((int)transform.rotation.eulerAngles.y < ((int)m_LastRotationPose.eulerAngles.y + m_RotationOffset)) && m_CanStopRotating)
         {
             transform.rotation = m_LastRotationPose;
             SetPatrolState();
@@ -198,10 +219,24 @@ public class Enemy : MonoBehaviour
     }
     void UpdateChaseState()
     {
+        SetNextChasePosition();
+        if (!SeesPlayer())
+            SetPatrolState();
 
+        if (CanStartAttacking())
+            SetAttackState();
     }
+
+
     void UpdateAttackState()
     {
+        if (DistanceToPlayer() > m_MaxDistanceToShoot)
+            SetChaseState();
+        if (CanShoot())
+        {
+            m_ShootTimer = 0;
+            Shoot();
+        }
 
     }
 
@@ -221,7 +256,7 @@ public class Enemy : MonoBehaviour
         Vector3 l_EnemyPosition = transform.position;
         Vector3 l_DirectionToEnemy = l_EnemyPosition - l_PlayerPosition;
         l_DirectionToEnemy.Normalize();
-        Vector3 l_DesiredPosition = l_PlayerPosition + l_DirectionToEnemy * m_MinDistanceToAttack;
+        Vector3 l_DesiredPosition = l_PlayerPosition + l_DirectionToEnemy * (m_MinDistanceToAttack-0.001f);
         m_NavMeshAgent.SetDestination(l_DesiredPosition);
     }
 
@@ -240,10 +275,7 @@ public class Enemy : MonoBehaviour
 
     bool HearsPlayer()
     {
-        Vector3 l_PlayerPosition = GameController.GetGameController().m_Player.transform.position;
-        Vector3 l_EnemyPosition = transform.position;
-        float l_DistanceToPlayer = Vector3.Distance(l_PlayerPosition, l_EnemyPosition);
-        return l_DistanceToPlayer < m_HearsPlayerRadius;
+        return DistanceToPlayer() < m_HearsPlayerRadius;
     }
 
     bool SeesPlayer()
@@ -252,7 +284,7 @@ public class Enemy : MonoBehaviour
         Vector3 l_EnemyPosition = transform.position;
         float l_DistanceToPlayer = Vector3.Distance(l_PlayerPosition, l_EnemyPosition);
 
-        if (l_DistanceToPlayer < m_MaxDistanceToSeePlayer)
+        if (DistanceToPlayer() < m_MaxDistanceToSeePlayer)
         {
             Vector3 l_EnemyForward = transform.forward;
             l_EnemyForward.y = 0.0f;
@@ -282,6 +314,25 @@ public class Enemy : MonoBehaviour
         {
             SetDieState();
         }
+    }
+    private float DistanceToPlayer()
+    {
+        Vector3 l_PlayerPosition = GameController.GetGameController().m_Player.transform.position;
+        Vector3 l_EnemyPosition = transform.position;
+        return Vector3.Distance(l_PlayerPosition, l_EnemyPosition);
+    }
+    private bool CanStartAttacking()
+    {
+        return DistanceToPlayer() <= m_MinDistanceToAttack;
+    }
+    private bool CanShoot()
+    {
+        m_ShootTimer += Time.deltaTime;
+        return (DistanceToPlayer() < m_MaxDistanceToShoot) && (m_ShootTimer>m_TimeToShoot);
+    }
+    private void Shoot()
+    {
+        GameController.GetGameController().m_Player.TakeDamage(m_ShootDamage);
     }
     public void RestartLevel()
     {

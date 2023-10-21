@@ -3,8 +3,8 @@ using UnityEngine;
 public class HitCollider : MonoBehaviour
 {
     const int m_HeadLifePoints = 50;
-    const int m_HelixLifePoints = 15;
-    const int m_BodyLifePoints = 25;
+    const int m_HelixLifePoints = 25;
+    const int m_BodyLifePoints = 0;
     public enum THitColliderType
     {
         HEAD = 0,

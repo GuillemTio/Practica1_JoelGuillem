@@ -456,16 +456,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c017f3ab7632184c824a5e3d591b1e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MinDistanceToAttack: 6
-  m_HearsPlayerRadius: 17
+  m_MinDistanceToAttack: 7
+  m_HearsPlayerRadius: 18
   m_PatrolPositions:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  m_MaxDistanceToSeePlayer: 11
+  m_MaxDistanceToSeePlayer: 15
   m_ConeVisionAngle: 55
-  m_AlertRotationVelocity: 1
+  m_AlertRotationVelocity: 50
   m_SeesPlayerLayerMask:
     serializedVersion: 2
     m_Bits: 2147483647
@@ -473,6 +473,9 @@ MonoBehaviour:
   m_LifeBarAnchor: {fileID: 1097673969012981123}
   m_LifeBarBackgroundRectTransform: {fileID: 1097673969382677140}
   m_LifeBarImage: {fileID: 1097673968062074987}
+  m_ShootDamage: 20
+  m_TimeToShoot: 2
+  m_MaxDistanceToShoot: 9
 --- !u!1 &1097673969368472924
 GameObject:
   m_ObjectHideFlags: 0

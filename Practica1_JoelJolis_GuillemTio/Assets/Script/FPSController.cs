@@ -211,12 +211,20 @@ public class FPSController : MonoBehaviour
             Reload();
         }
 
+        
+
         if ((m_ScoreEnter == true))
         {
             m_ScoreTimer -= Time.deltaTime;
+
+            m_HUD.SetScorePoints(m_ScoreCurrent);
             m_HUD.SetScoreTimer(m_ScoreTimer);
-            print("llego papa");
         }
+        else
+        {
+            SetScore();
+        }
+        
     }
 
     private bool CanReload()
@@ -332,6 +340,15 @@ public class FPSController : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "ShootingArea")
+        {
+            print("no esta area");
+            m_ScoreEnter = false;
+        }
+    }
+
     internal bool CanPickAmmo()
     {
         return true;
@@ -346,24 +363,20 @@ public class FPSController : MonoBehaviour
     {
         return m_ShieldCurrent < 100;
     }
+
     private void SetScore()
     {
         m_ScoreCurrent = 0;
         m_ScoreTimer = 30;
-        if(m_ScoreEnter == true)
-        {
-            m_HUD.SetScorePoints(m_ScoreCurrent);
-        }
+
+        //m_HUD.SetScorePoints(m_ScoreCurrent);
     }
 
     internal void AddScore(float points)
     {
         m_ScoreCurrent = m_ScoreCurrent + points;
-
-        if (m_ScoreEnter == true)
-        {
-            m_HUD.SetScorePoints(m_ScoreCurrent);
-        }
+        //m_HUD.SetScorePoints(m_ScoreCurrent);
+        
     }
 
     private void SetAmmo()

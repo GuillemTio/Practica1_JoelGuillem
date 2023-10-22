@@ -10,6 +10,8 @@ public class HUD : MonoBehaviour
 
     public TextMeshProUGUI m_ScorePointsText;
     public TextMeshProUGUI m_ScoreTimer;
+    public GameObject m_InspectorScoreTimer;
+    public GameObject m_InspectorScorePoints;
 
     public Slider m_HealthBar;
     public Slider m_ShieldBar;
@@ -22,6 +24,9 @@ public class HUD : MonoBehaviour
         {
             GameController.GetGameController().m_HUD = this;
             GameObject.DontDestroyOnLoad(gameObject);
+
+            m_InspectorScoreTimer.SetActive(false);
+            m_InspectorScorePoints.SetActive(false);
         }
         else
         {
@@ -64,13 +69,20 @@ public class HUD : MonoBehaviour
 
     internal void SetScorePoints(float points)
     {
+        m_InspectorScorePoints.SetActive(true);
         m_ScorePointsText.text = points.ToString();
     }
 
     internal void SetScoreTimer(float timer)
     {
+        m_InspectorScoreTimer.SetActive(true);
         m_ScoreTimer.text = timer.ToString("0");
     }
 
+    internal void DisableScoreSystem()
+    {
+        m_InspectorScoreTimer.SetActive(false);
+        m_InspectorScorePoints.SetActive(false);
+    }
 
 }

@@ -221,6 +221,7 @@ public class FPSController : MonoBehaviour
         else
         {
             SetScore();
+            m_HUD.DisableScoreSystem();
         }
         
     }

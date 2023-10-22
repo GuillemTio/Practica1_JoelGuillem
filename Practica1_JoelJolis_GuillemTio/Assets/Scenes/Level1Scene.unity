@@ -524,6 +524,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &660056248 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 968459184, guid: 9e9a3e4689aa41d439fd175507d21211, type: 3}
+  m_PrefabInstance: {fileID: 6379298329449535304}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1016,6 +1021,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 72b45094beb364b4aa0cf130065a02f0, type: 3}
   m_PrefabInstance: {fileID: 1766576512}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2001032582 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 750367279, guid: 9e9a3e4689aa41d439fd175507d21211, type: 3}
+  m_PrefabInstance: {fileID: 6379298329449535304}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2132835165
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1160,11 +1170,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 750367279, guid: 9e9a3e4689aa41d439fd175507d21211, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 968459184, guid: 9e9a3e4689aa41d439fd175507d21211, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6379298329348581137, guid: 9e9a3e4689aa41d439fd175507d21211, type: 3}
       propertyPath: m_Name
@@ -1254,6 +1264,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6379298329348581142, guid: 9e9a3e4689aa41d439fd175507d21211, type: 3}
+      propertyPath: Timer
+      value: 
+      objectReference: {fileID: 2001032582}
+    - target: {fileID: 6379298329348581142, guid: 9e9a3e4689aa41d439fd175507d21211, type: 3}
+      propertyPath: m_InspectorScoreTimer
+      value: 
+      objectReference: {fileID: 2001032582}
+    - target: {fileID: 6379298329348581142, guid: 9e9a3e4689aa41d439fd175507d21211, type: 3}
+      propertyPath: m_InspectorScorePoints
+      value: 
+      objectReference: {fileID: 660056248}
     - target: {fileID: 6379298330576379495, guid: 9e9a3e4689aa41d439fd175507d21211, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

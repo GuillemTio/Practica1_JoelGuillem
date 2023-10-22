@@ -215,6 +215,7 @@ public class FPSController : MonoBehaviour
         {
             m_ScoreTimer -= Time.deltaTime;
 
+            m_HUD.DisableEnterText();
             m_HUD.SetScorePoints(m_ScoreCurrent);
             m_HUD.SetScoreTimer(m_ScoreTimer);
         }
@@ -337,9 +338,14 @@ public class FPSController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if ((other.tag == "ShootingArea") && (Input.GetKeyDown(m_EnterKeyCode)))
+        if ((other.tag == "ShootingArea"))
         {
-            m_ScoreEnter = true;
+            m_HUD.EnableEnterText();
+
+            if (Input.GetKeyDown(m_EnterKeyCode))
+            {
+                m_ScoreEnter = true;
+            }
         }
     }
 
@@ -347,7 +353,7 @@ public class FPSController : MonoBehaviour
     {
         if (other.tag == "ShootingArea")
         {
-            print("no esta area");
+            m_HUD.DisableEnterText();
             m_ScoreEnter = false;
         }
     }

@@ -8,10 +8,12 @@ public class HUD : MonoBehaviour
     public TextMeshProUGUI m_LoadedAmmoText;
     public TextMeshProUGUI m_OtherAmmoText;
 
+    public TextMeshProUGUI m_EnterText;
     public TextMeshProUGUI m_ScorePointsText;
     public TextMeshProUGUI m_ScoreTimer;
     public GameObject m_InspectorScoreTimer;
     public GameObject m_InspectorScorePoints;
+    public GameObject m_InspectorEnterText;
 
     public Slider m_HealthBar;
     public Slider m_ShieldBar;
@@ -79,10 +81,20 @@ public class HUD : MonoBehaviour
         m_ScoreTimer.text = timer.ToString("0");
     }
 
+    internal void EnableEnterText()
+    {
+        m_InspectorEnterText.SetActive(true);
+    }
+
     internal void DisableScoreSystem()
     {
         m_InspectorScoreTimer.SetActive(false);
         m_InspectorScorePoints.SetActive(false);
+    }
+
+    internal void DisableEnterText()
+    {
+        m_InspectorEnterText.SetActive(false);
     }
 
 }

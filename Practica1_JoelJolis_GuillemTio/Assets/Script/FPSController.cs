@@ -100,7 +100,7 @@ public class FPSController : MonoBehaviour
 
     void Start()
     {
-        m_PoolElements = new CPoolElements(20, m_HitParticlesPrefab, null);
+        m_PoolElements = new CPoolElements(25, m_HitParticlesPrefab, null);
         Cursor.lockState = CursorLockMode.Locked;
         SetIdleWeaponAnimation();
     }

@@ -209,9 +209,7 @@ public class FPSController : MonoBehaviour
         if (Input.GetKeyDown(m_ReloadKeyCode) && CanReload())
         {
             Reload();
-        }
-
-        
+        }        
 
         if ((m_ScoreEnter == true))
         {

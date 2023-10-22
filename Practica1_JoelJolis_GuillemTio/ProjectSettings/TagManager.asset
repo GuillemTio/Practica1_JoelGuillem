@@ -9,6 +9,7 @@ TagManager:
   - HumanTarget
   - Enemy
   - ShootingArea
+  - DeathZone
   layers:
   - Default
   - TransparentFX

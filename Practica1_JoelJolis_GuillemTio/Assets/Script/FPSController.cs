@@ -328,6 +328,10 @@ public class FPSController : MonoBehaviour
             Item l_Item = other.GetComponent<Item>();
             if (l_Item.CanPick()) l_Item.Pick();
         }
+        else if (other.tag == "DeathZone")
+        {
+            Kill();
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -394,7 +398,7 @@ public class FPSController : MonoBehaviour
     internal void AddHealth(int m_HealthCount)
     {
         m_HealthCurrent += m_HealthCount;
-        m_HealthCurrent = Mathf.Min(m_HealthCurrent,100);
+        m_HealthCurrent = Mathf.Max(m_HealthCurrent,100);
         m_HUD.SetHealthText(m_HealthCurrent);
         m_HUD.SetHealthBar(m_HealthCurrent);
     }
@@ -402,7 +406,7 @@ public class FPSController : MonoBehaviour
     internal void AddShield(int m_ShieldCount)
     {
         m_ShieldCurrent += m_ShieldCount;
-        m_ShieldCurrent = Mathf.Min(m_ShieldCurrent, 100);
+        m_ShieldCurrent = Mathf.Max(m_ShieldCurrent, 100);
         m_HUD.SetShieldText(m_ShieldCurrent);
         m_HUD.SetShieldBar(m_ShieldCurrent);
     }

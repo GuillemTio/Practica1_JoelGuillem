@@ -28,7 +28,7 @@ public class HitCollider : MonoBehaviour
             l_LifePoints = m_BodyLifePoints;
         }
 
-        m_Enemy.Hit(l_LifePoints);
+        m_Enemy.Hit(l_LifePoints, transform.position);
     }
 
 }

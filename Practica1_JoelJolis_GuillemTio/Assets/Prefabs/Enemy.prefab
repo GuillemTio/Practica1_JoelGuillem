@@ -463,13 +463,20 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  m_Boxes:
+  - {fileID: 1967206187506457899, guid: 840cf17a87e012649bba18299d9117c3, type: 3}
+  - {fileID: 1967206187506457899, guid: 82d3ea046921b50428f5d6ab11f5a303, type: 3}
+  - {fileID: 1967206187506457899, guid: 59d187c4685d5ab47b115be84454bf8b, type: 3}
   m_MaxDistanceToSeePlayer: 15
   m_ConeVisionAngle: 55
   m_AlertRotationVelocity: 50
   m_SeesPlayerLayerMask:
     serializedVersion: 2
     m_Bits: 2147483647
+  m_ImpactParticles: {fileID: 3174481502702750255, guid: f3690ca3361f230478ad72f5185cca29, type: 3}
   m_MaxLife: 100
+  m_EnemyMaterial: {fileID: 2100000, guid: 9468cfbf407387c4d8fef60308588e42, type: 2}
+  m_TimeToFade: 1
   m_LifeBarAnchor: {fileID: 1097673969012981123}
   m_LifeBarBackgroundRectTransform: {fileID: 1097673969382677140}
   m_LifeBarImage: {fileID: 1097673968062074987}
@@ -795,6 +802,10 @@ PrefabInstance:
     - target: {fileID: 400002, guid: f14b6f7503476eb4e9b2afc1cc05e719, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: f14b6f7503476eb4e9b2afc1cc05e719, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f14b6f7503476eb4e9b2afc1cc05e719, type: 3}

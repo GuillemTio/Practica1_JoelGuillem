@@ -15,6 +15,7 @@ public class CPoolElements
             GameObject l_Instance = GameObject.Instantiate(Prefab);
             l_Instance.transform.SetParent(Parent);
             m_Elements.Add(l_Instance);
+            GameObject.DontDestroyOnLoad(l_Instance);
         }
     }
     public GameObject GetNextElement()

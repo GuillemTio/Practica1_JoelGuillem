@@ -101,6 +101,7 @@ public class FPSController : MonoBehaviour
     void Start()
     {
         m_PoolElements = new CPoolElements(25, m_HitParticlesPrefab, null);
+
         Cursor.lockState = CursorLockMode.Locked;
         SetIdleWeaponAnimation();
     }
@@ -334,6 +335,8 @@ public class FPSController : MonoBehaviour
         {
             Kill();
         }
+        else if (other.tag == "GoToLevel2")
+            GameController.GetGameController().GoToLevel2();
     }
 
     private void OnTriggerStay(Collider other)

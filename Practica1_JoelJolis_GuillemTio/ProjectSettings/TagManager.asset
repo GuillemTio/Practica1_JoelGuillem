@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - ShootingArea
   - DeathZone
+  - GoToLevel2
   layers:
   - Default
   - TransparentFX

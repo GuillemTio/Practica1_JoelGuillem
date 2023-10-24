@@ -54090,10 +54090,6 @@ PrefabInstance:
       value: Enemy1
       objectReference: {fileID: 0}
     - target: {fileID: 1097673969012981126, guid: 05d7592ba8aff1d45ab7ff1eddd67386, type: 3}
-      propertyPath: m_SeesPlayerLayerMask.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
-    - target: {fileID: 1097673969012981126, guid: 05d7592ba8aff1d45ab7ff1eddd67386, type: 3}
       propertyPath: m_PatrolPositions.Array.data[0]
       value: 
       objectReference: {fileID: 1900348593}

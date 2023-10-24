@@ -183,11 +183,12 @@ MonoBehaviour:
   m_ShootAnimationClip: {fileID: 7400000, guid: 3482ebabfe11fc94fa8127f68320da7a, type: 2}
   m_IdleAnimationClip: {fileID: 7400000, guid: 7f394bb3d39c2da44ad6afe7cfb586d2, type: 2}
   m_ReloadAnimationClip: {fileID: 7400000, guid: 1cf89a13820617041817823caeb54a2d, type: 2}
+  m_TargetMovingAnimation: {fileID: 0}
   m_Camera: {fileID: 5269552005044814513}
   m_MaxShootDistance: 200
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 2147483647
+    m_Bits: 61
   m_HitParticlesPrefab: {fileID: 5031046392345779431, guid: b62ab6bc6624c7c4cb1725b61eb35bc6, type: 3}
   m_StartAmmo: 37
   m_MaxBulletPerClip: 20
@@ -200,7 +201,7 @@ MonoBehaviour:
   m_JumpKeyCode: 32
   m_SprintKeyCode: 304
   m_ReloadKeyCode: 114
-  m_EnterKeyCode: 271
+  m_EnterKeyCode: 13
   m_ShootMouseButton: 0
   m_DebugLockAngleKeyCode: 105
   m_DebugLockKeyCode: 111

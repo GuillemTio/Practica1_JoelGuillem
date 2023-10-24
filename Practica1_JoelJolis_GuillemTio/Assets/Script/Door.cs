@@ -82,7 +82,7 @@ public class Door : MonoBehaviour
         Debug.DrawRay(m_RayTransform.position, l_DoorToPlayer * m_AutomaticDoorDistance, Color.yellow);
         return Physics.Raycast(l_Ray, m_AutomaticDoorDistance,m_LayerMask);
     }
-    private void OpenDoor()
+    internal void OpenDoor()
     {
         m_DoorAnimation.CrossFade(m_OpenDoorAnimationClip.name, 0.1f);
         m_DoorAnimation.CrossFadeQueued(m_StayOpenAnimationClip.name, 0.1f);

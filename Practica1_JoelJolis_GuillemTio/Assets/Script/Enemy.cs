@@ -50,6 +50,7 @@ public class Enemy : MonoBehaviour
     public Transform m_LifeBarAnchor;
     public RectTransform m_LifeBarBackgroundRectTransform;
     public Image m_LifeBarImage;
+    public float m_LifeBarOffset;
 
     [Header("Attack")]
     public float m_ShootDamage;
@@ -129,19 +130,21 @@ public class Enemy : MonoBehaviour
         Vector3 l_EnemyPosition = transform.position;
         float l_DistanceToPlayer = Vector3.Distance(l_PlayerPosition, l_EnemyPosition);
 
+
         Vector3 l_EnemyToPlayer = l_PlayerPosition - l_EnemyPosition;
 
         l_EnemyToPlayer.y = 0.0f;
         l_EnemyToPlayer.Normalize();
 
         Ray l_Ray = new Ray(l_EnemyPosition + Vector3.up * 1.8f, l_EnemyToPlayer);
+        Debug.DrawRay(l_EnemyPosition, l_EnemyToPlayer * l_DistanceToPlayer, Color.yellow);
         if (!Physics.Raycast(l_Ray, l_DistanceToPlayer, m_SeesPlayerLayerMask.value))
         {
             if (!m_LifeBarBackgroundRectTransform.gameObject.activeSelf)
             {
                 m_LifeBarBackgroundRectTransform.gameObject.SetActive(true);
             }
-            Vector3 l_ViewportPosition = GameController.GetGameController().m_Player.m_Camera.WorldToViewportPoint(m_LifeBarAnchor.position);
+            Vector3 l_ViewportPosition = GameController.GetGameController().m_Player.m_Camera.WorldToViewportPoint(m_LifeBarAnchor.position+(Vector3.up*m_LifeBarOffset));
             m_LifeBarBackgroundRectTransform.anchoredPosition = new Vector3(l_ViewportPosition.x * Screen.width, -(Screen.height - l_ViewportPosition.y * Screen.height));
             m_LifeBarBackgroundRectTransform.gameObject.SetActive(l_ViewportPosition.z >= 0f);
             ShowLifeBar();

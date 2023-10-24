@@ -275,7 +275,7 @@ public class FPSController : MonoBehaviour
             {
                 l_RaycastHit.collider.GetComponent<HitCollider>().Hit();
             }
-            else
+            else if (l_RaycastHit.collider.tag != "DeathZone")
             {
                 CreateShootHitParticles(l_RaycastHit.point, l_RaycastHit.normal);
             }
@@ -469,7 +469,7 @@ public class FPSController : MonoBehaviour
 
         if(m_HealthCurrent <= 0)
         {
-
+            Debug.Log("MUERTO");
             // hace falta que pueda morir!!!!!!!!
         }
 

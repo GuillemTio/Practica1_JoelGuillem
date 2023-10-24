@@ -18,6 +18,7 @@ public class FPSController : MonoBehaviour
     float m_ScoreCurrent;
     float m_ScoreTimer;
     bool m_ScoreEnter;
+    bool m_ScoreEnterAgain;
 
     public float m_PitchSpeed;
     public bool m_YawInverted;
@@ -40,6 +41,8 @@ public class FPSController : MonoBehaviour
     public AnimationClip m_ShootAnimationClip;
     public AnimationClip m_IdleAnimationClip;
     public AnimationClip m_ReloadAnimationClip;
+
+    public Animation m_TargetMovingAnimation;
 
     public Camera m_Camera;
 
@@ -219,11 +222,17 @@ public class FPSController : MonoBehaviour
             m_HUD.DisableEnterText();
             m_HUD.SetScorePoints(m_ScoreCurrent);
             m_HUD.SetScoreTimer(m_ScoreTimer);
+
+            if(m_ScoreCurrent >= 1000)
+            {
+                m_HUD.EnableExitText();
+            }
         }
         else
         {
             SetScore();
             m_HUD.DisableScoreSystem();
+            m_HUD.DisableExitText();
         }
         
     }
@@ -298,6 +307,11 @@ public class FPSController : MonoBehaviour
     {
         m_WeaponAnimation.CrossFade(m_ReloadAnimationClip.name, 0.1f);
         m_WeaponAnimation.CrossFadeQueued(m_IdleAnimationClip.name, 0.1f);
+    }
+
+    void SetTargetMovingAnimation()
+    {
+        m_TargetMovingAnimation.CrossFade(m_TargetMovingAnimation.name);
     }
 
     public void RestartLevel()
@@ -380,15 +394,11 @@ public class FPSController : MonoBehaviour
     {
         m_ScoreCurrent = 0;
         m_ScoreTimer = 30;
-
-        //m_HUD.SetScorePoints(m_ScoreCurrent);
     }
 
     internal void AddScore(float points)
     {
         m_ScoreCurrent = m_ScoreCurrent + points;
-        //m_HUD.SetScorePoints(m_ScoreCurrent);
-        
     }
 
     private void SetAmmo()

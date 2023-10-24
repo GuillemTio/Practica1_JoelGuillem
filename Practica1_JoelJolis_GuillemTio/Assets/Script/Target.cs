@@ -8,12 +8,6 @@ public class Target : MonoBehaviour
     public float points;
     public bool isMoving;
 
-
-
-
-
-
-
     public void TakeDamage (float amount)
     {
         health -= amount;

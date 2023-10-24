@@ -9,11 +9,13 @@ public class HUD : MonoBehaviour
     public TextMeshProUGUI m_OtherAmmoText;
 
     public TextMeshProUGUI m_EnterText;
+    public TextMeshProUGUI m_ExitText;
     public TextMeshProUGUI m_ScorePointsText;
     public TextMeshProUGUI m_ScoreTimer;
     public GameObject m_InspectorScoreTimer;
     public GameObject m_InspectorScorePoints;
     public GameObject m_InspectorEnterText;
+    public GameObject m_InspectorExitText;
 
     public Slider m_HealthBar;
     public Slider m_ShieldBar;
@@ -86,6 +88,11 @@ public class HUD : MonoBehaviour
         m_InspectorEnterText.SetActive(true);
     }
 
+    internal void EnableExitText()
+    {
+        m_InspectorExitText.SetActive(true);
+    }
+
     internal void DisableScoreSystem()
     {
         m_InspectorScoreTimer.SetActive(false);
@@ -95,6 +102,11 @@ public class HUD : MonoBehaviour
     internal void DisableEnterText()
     {
         m_InspectorEnterText.SetActive(false);
+    }
+
+    internal void DisableExitText()
+    {
+        m_InspectorExitText.SetActive(false);
     }
 
 }

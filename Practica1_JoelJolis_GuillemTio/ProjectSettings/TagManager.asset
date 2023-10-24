@@ -11,6 +11,7 @@ TagManager:
   - ShootingArea
   - DeathZone
   - GoToLevel2
+  - Key
   layers:
   - Default
   - TransparentFX

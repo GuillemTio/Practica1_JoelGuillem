@@ -351,6 +351,11 @@ public class FPSController : MonoBehaviour
         }
         else if (other.tag == "GoToLevel2")
             GameController.GetGameController().GoToLevel2();
+        else if (other.tag == "Key")
+        {
+            other.GetComponent<Key>().OpenKeyDoor();
+        }
+
     }
 
     private void OnTriggerStay(Collider other)

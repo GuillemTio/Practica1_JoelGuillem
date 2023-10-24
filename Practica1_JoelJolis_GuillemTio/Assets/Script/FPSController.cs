@@ -7,6 +7,7 @@ public class FPSController : MonoBehaviour
     public Transform m_PitchController;
 
     private HUD m_HUD;
+    private Door m_Door;
 
     public float m_Damage;
 

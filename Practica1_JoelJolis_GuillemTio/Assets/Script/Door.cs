@@ -58,18 +58,9 @@ public class Door : MonoBehaviour
         }
     }
 
-    internal void UpdatePoints_Necessary(float points)
+    void UpdatePoints_Necessary()
     {
-        l_points = points;
 
-        if (l_points >= 1000)
-        {
-            OpenDoor();
-        }
-        else
-        {
-            CloseDoor();
-        }
     }
 
     void UpdateKey_Necessary()

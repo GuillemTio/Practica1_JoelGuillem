@@ -227,7 +227,7 @@ public class FPSController : MonoBehaviour
             if(m_ScoreCurrent >= 1000)
             {
                 m_HUD.EnableExitText();
-                m_Door.UpdatePoints_Necessary(m_ScoreCurrent);
+                m_Door.OpenDoor();
             }
         }
         else

@@ -24,7 +24,7 @@ public class Door : MonoBehaviour
 
     private void Start()
     {
-        m_DoorAnimation.CrossFade(m_StayClosedAnimationClip.name);
+        m_DoorAnimation.Play(m_StayClosedAnimationClip.name);
     }
     void Update()
     {

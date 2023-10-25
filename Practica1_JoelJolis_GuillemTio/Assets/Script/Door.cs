@@ -64,8 +64,7 @@ public class Door : MonoBehaviour
         {
             m_IsDoorOpen = true;
             OpenDoor();
-        }
-      
+        }     
     }
 
     void UpdateKey_Necessary()

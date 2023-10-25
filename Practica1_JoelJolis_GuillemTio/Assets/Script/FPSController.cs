@@ -273,7 +273,6 @@ public class FPSController : MonoBehaviour
             if (l_target != null && m_ScoreEnter == true)
             {
                 AddScore(l_target.points);
-                CreateShootHitParticles(l_RaycastHit.point, l_RaycastHit.normal);
             }
             else if (l_RaycastHit.collider.tag == "Enemy")
             {

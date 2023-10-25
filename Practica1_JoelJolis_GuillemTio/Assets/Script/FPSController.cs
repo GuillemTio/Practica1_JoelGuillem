@@ -20,6 +20,8 @@ public class FPSController : MonoBehaviour
     float m_ScoreTimer;
     bool m_ScoreEnter;
     bool m_ScoreEnterAgain;
+    public bool m_PointsAchieved;
+    public float m_PointsToAchieve;
 
     public float m_PitchSpeed;
     public bool m_YawInverted;
@@ -224,10 +226,10 @@ public class FPSController : MonoBehaviour
             m_HUD.SetScorePoints(m_ScoreCurrent);
             m_HUD.SetScoreTimer(m_ScoreTimer);
 
-            if(m_ScoreCurrent >= 1000)
+            if(m_ScoreCurrent >= m_PointsToAchieve)
             {
                 m_HUD.EnableExitText();
-                m_Door.OpenDoor();
+                m_PointsAchieved = true;
             }
         }
         else

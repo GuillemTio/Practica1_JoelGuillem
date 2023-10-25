@@ -60,7 +60,12 @@ public class Door : MonoBehaviour
 
     void UpdatePoints_Necessary()
     {
-
+        if((GameController.GetGameController().m_Player.m_PointsAchieved) && !m_IsDoorOpen)
+        {
+            m_IsDoorOpen = true;
+            OpenDoor();
+        }
+      
     }
 
     void UpdateKey_Necessary()

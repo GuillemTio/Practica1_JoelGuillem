@@ -457,7 +457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MinDistanceToAttack: 7
-  m_HearsPlayerRadius: 18
+  m_HearsPlayerRadius: 17
   m_PatrolPositions:
   - {fileID: 0}
   - {fileID: 0}
@@ -467,7 +467,7 @@ MonoBehaviour:
   - {fileID: 1967206187506457899, guid: 840cf17a87e012649bba18299d9117c3, type: 3}
   - {fileID: 1967206187506457899, guid: 82d3ea046921b50428f5d6ab11f5a303, type: 3}
   - {fileID: 1967206187506457899, guid: 59d187c4685d5ab47b115be84454bf8b, type: 3}
-  m_MaxDistanceToSeePlayer: 15
+  m_MaxDistanceToSeePlayer: 14
   m_ConeVisionAngle: 55
   m_AlertRotationVelocity: 50
   m_SeesPlayerLayerMask:
@@ -482,7 +482,7 @@ MonoBehaviour:
   m_LifeBarImage: {fileID: 1097673968062074987}
   m_LifeBarOffset: 1.9
   m_ShootDamage: 20
-  m_TimeToShoot: 2
+  m_TimeToShoot: 1.1
   m_MaxDistanceToShoot: 9
 --- !u!1 &1097673969368472924
 GameObject:

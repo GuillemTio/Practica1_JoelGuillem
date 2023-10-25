@@ -326,6 +326,7 @@ public class FPSController : MonoBehaviour
         m_Pitch = 0.0f;
         m_CharacterController.enabled = true;
         SetAmmo();
+        SetHealthShield();
     }
 
     void SetStartPosition(Transform startTransform)
@@ -426,7 +427,7 @@ public class FPSController : MonoBehaviour
     internal void AddHealth(int m_HealthCount)
     {
         m_HealthCurrent += m_HealthCount;
-        m_HealthCurrent = Mathf.Max(m_HealthCurrent,100);
+        m_HealthCurrent = Mathf.Clamp(m_HealthCurrent, 0, 100);
         m_HUD.SetHealthText(m_HealthCurrent);
         m_HUD.SetHealthBar(m_HealthCurrent);
     }
@@ -434,14 +435,14 @@ public class FPSController : MonoBehaviour
     internal void AddShield(int m_ShieldCount)
     {
         m_ShieldCurrent += m_ShieldCount;
-        m_ShieldCurrent = Mathf.Max(m_ShieldCurrent, 100);
+        m_ShieldCurrent = Mathf.Clamp(m_ShieldCurrent, 0, 100);
         m_HUD.SetShieldText(m_ShieldCurrent);
         m_HUD.SetShieldBar(m_ShieldCurrent);
     }
 
     private void SetHealthShield()
     {
-        m_HealthCurrent = Mathf.Clamp(m_HealthStart,0,100);
+        m_HealthCurrent = Mathf.Clamp(m_HealthStart,1,100);
         m_ShieldCurrent = Mathf.Clamp(m_ShieldStart,0,100);
 
         m_HUD.SetHealthBar(m_HealthCurrent);
@@ -478,14 +479,13 @@ public class FPSController : MonoBehaviour
         if(m_HealthCurrent <= 0)
         {
             Debug.Log("MUERTO");
-            // hace falta que pueda morir!!!!!!!!
+            Kill();
         }
 
     }
     void Kill()
     {
         m_HealthCurrent = 0;
-        //it should start after a while
         GameController.GetGameController().RestartLevel();
     }
 }

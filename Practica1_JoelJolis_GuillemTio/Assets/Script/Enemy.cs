@@ -158,48 +158,39 @@ public class Enemy : MonoBehaviour
     void SetIdleState()
     {
         m_State = TState.IDLE;
-        Debug.Log(m_State);
     }
     void SetPatrolState()
     {
         m_State = TState.PATROL;
         m_NavMeshAgent.isStopped = false;
         m_CanStopRotating = false;
-        Debug.Log(m_State);
     }
     void SetAlertState()
     {
         m_State = TState.ALERT;
         m_LastRotationPose = transform.rotation;
         m_NavMeshAgent.isStopped = true;
-        Debug.Log(m_State);
     }
     void SetChaseState()
     {
         m_State = TState.CHASE;
         m_CanStopRotating = false;
         m_NavMeshAgent.isStopped = false;
-        Debug.Log(m_State);
     }
     void SetAttackState()
     {
         m_State = TState.ATTACK;
-        Debug.Log(m_State);
-        //animacio
     }
     void SetHitState()
     {
         m_LastState = m_State;
         m_State = TState.HIT;
-        Debug.Log(m_State);
-        //animacio
+
     }
     void SetDieState()
     {
         m_State = TState.DIE;
 
-        Debug.Log(m_State);
-        //animacion
     }
 
     void SetLastState()

@@ -277,7 +277,7 @@ public class Enemy : MonoBehaviour
 
     private void DropRandomItem()
     {
-        float l_RandomNum = UnityEngine.Random.Range(0, m_Boxes.Count-1);
+        float l_RandomNum = UnityEngine.Random.Range(0, m_Boxes.Count);
         Instantiate(m_Boxes[(int)l_RandomNum], transform.position, transform.rotation);
     }
 

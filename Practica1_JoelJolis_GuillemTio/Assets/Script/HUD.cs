@@ -74,13 +74,13 @@ public class HUD : MonoBehaviour
     internal void SetScorePoints(float points)
     {
         m_InspectorScorePoints.SetActive(true);
-        m_ScorePointsText.text = points.ToString();
+        m_ScorePointsText.text = "Score: "+ points.ToString();
     }
 
     internal void SetScoreTimer(float timer)
     {
         m_InspectorScoreTimer.SetActive(true);
-        m_ScoreTimer.text = timer.ToString("0");
+        m_ScoreTimer.text = "Time: " + timer.ToString("0");
     }
 
     internal void EnableEnterText()

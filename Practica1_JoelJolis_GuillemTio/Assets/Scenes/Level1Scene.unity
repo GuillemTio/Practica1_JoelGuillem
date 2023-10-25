@@ -997,6 +997,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShootingTargetSketchfab
       objectReference: {fileID: 0}
+    - target: {fileID: 2601378331930919611, guid: 34d484616d82c474793b50dfbb9a09b5, type: 3}
+      propertyPath: m_TagString
+      value: HumanTarget
+      objectReference: {fileID: 0}
     - target: {fileID: 3409826780068206593, guid: 34d484616d82c474793b50dfbb9a09b5, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2092,7 +2096,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5269552006736292178, guid: 97304eb98bae8b4408190accf3920c48, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 42.7
+      value: -289.5
       objectReference: {fileID: 0}
     - target: {fileID: 5269552006736292178, guid: 97304eb98bae8b4408190accf3920c48, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2100,7 +2104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5269552006736292178, guid: 97304eb98bae8b4408190accf3920c48, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.3
+      value: -3.1
       objectReference: {fileID: 0}
     - target: {fileID: 5269552006736292178, guid: 97304eb98bae8b4408190accf3920c48, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2129,10 +2133,6 @@ PrefabInstance:
     - target: {fileID: 5269552006736292178, guid: 97304eb98bae8b4408190accf3920c48, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5269552006736292179, guid: 97304eb98bae8b4408190accf3920c48, type: 3}
-      propertyPath: m_PointsToAchieve
-      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97304eb98bae8b4408190accf3920c48, type: 3}
@@ -2815,6 +2815,10 @@ PrefabInstance:
     - target: {fileID: 2601378331930919611, guid: 34d484616d82c474793b50dfbb9a09b5, type: 3}
       propertyPath: m_Name
       value: ShootingTargetSketchfab
+      objectReference: {fileID: 0}
+    - target: {fileID: 2601378331930919611, guid: 34d484616d82c474793b50dfbb9a09b5, type: 3}
+      propertyPath: m_TagString
+      value: HumanTarget
       objectReference: {fileID: 0}
     - target: {fileID: 3409826780068206593, guid: 34d484616d82c474793b50dfbb9a09b5, type: 3}
       propertyPath: m_RootOrder
@@ -4138,6 +4142,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShootingTargetSketchfab
       objectReference: {fileID: 0}
+    - target: {fileID: 2601378331930919611, guid: 34d484616d82c474793b50dfbb9a09b5, type: 3}
+      propertyPath: m_TagString
+      value: HumanTarget
+      objectReference: {fileID: 0}
     - target: {fileID: 3409826780068206593, guid: 34d484616d82c474793b50dfbb9a09b5, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -4199,6 +4207,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 750367279, guid: 9e9a3e4689aa41d439fd175507d21211, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 750367280, guid: 9e9a3e4689aa41d439fd175507d21211, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 324
+      objectReference: {fileID: 0}
+    - target: {fileID: 750367280, guid: 9e9a3e4689aa41d439fd175507d21211, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 132.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 968459184, guid: 9e9a3e4689aa41d439fd175507d21211, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 968459185, guid: 9e9a3e4689aa41d439fd175507d21211, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 325.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 968459185, guid: 9e9a3e4689aa41d439fd175507d21211, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 235.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1187941275, guid: 9e9a3e4689aa41d439fd175507d21211, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1666473051, guid: 9e9a3e4689aa41d439fd175507d21211, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6379298329348581137, guid: 9e9a3e4689aa41d439fd175507d21211, type: 3}
       propertyPath: m_Name
       value: Canvas

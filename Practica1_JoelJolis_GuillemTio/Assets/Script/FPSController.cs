@@ -292,7 +292,7 @@ public class FPSController : MonoBehaviour
             {
                 l_RaycastHit.collider.GetComponent<HitCollider>().Hit();
             }
-            else if (l_RaycastHit.collider.tag != "DeathZone")
+            else if (l_RaycastHit.collider.tag != "DeathZone" && l_RaycastHit.collider.tag != "HumanTarget")
             {
                 CreateShootHitParticles(l_RaycastHit.point, l_RaycastHit.normal);
             }
@@ -324,11 +324,6 @@ public class FPSController : MonoBehaviour
     {
         m_WeaponAnimation.CrossFade(m_ReloadAnimationClip.name, 0.1f);
         m_WeaponAnimation.CrossFadeQueued(m_IdleAnimationClip.name, 0.1f);
-    }
-
-    void SetTargetMovingAnimation()
-    {
-        m_TargetMovingAnimation.CrossFade(m_TargetMovingAnimation.name);
     }
 
     public void RestartLevel()

@@ -371,6 +371,7 @@ public class FPSController : MonoBehaviour
             if (Input.GetKeyDown(m_EnterKeyCode))
             {
                 m_ScoreEnter = true;
+
             }
         }
     }

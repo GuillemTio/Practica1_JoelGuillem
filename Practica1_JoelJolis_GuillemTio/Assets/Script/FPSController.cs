@@ -220,9 +220,9 @@ public class FPSController : MonoBehaviour
 
         if ((m_ScoreEnter == true))
         {
-            m_ScoreTimer -= Time.deltaTime;
             if(m_ScoreTimer < 0)
             {
+                m_ScoreEnter = false;
                 SetScore();
             }
 
@@ -236,8 +236,14 @@ public class FPSController : MonoBehaviour
                 m_PointsAchieved = true;
                 if (Input.GetKeyDown(m_EnterKeyCode))
                 {
+                    m_HUD.DisableScoreSystem();
+                    m_HUD.DisableExitText();
                     SetScore();
                 }
+            }
+            else
+            {
+                m_ScoreTimer -= Time.deltaTime;
             }
         }
         else
